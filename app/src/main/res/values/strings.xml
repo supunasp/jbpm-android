@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MobileClient</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">item Detail</string>
+    <string name="title_activity_menu">Mobile Client</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_task">Tasks</string>
+    <string name="title_activity_process">Process Management</string>
+    <string name="title_activity_logout">Logout</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+</resources>
