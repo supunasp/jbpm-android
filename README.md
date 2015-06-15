@@ -9,3 +9,13 @@ The jBPM core engine itself is a lightweight workflow engine. Therefore it can b
 from the mobile UI, a prototype of jBPM on android will be also created where user can interact withoutconnect to the 
 jBPM-console.   
 
+This app uses the remote REST API to connect to the execution server of the jBPM Console and execute the Evaluation process there.
+ 
+ This prototype assumes: - you have the jbpm console running at
+ http://localhost:8080/jbpm-console (automatically when using jbpm-installer)
+  - you have users krisv/krisv, john/john and mary/mary (automatically whenusing jbpm-installer) - you have deployed the Evaluation project (part of the jbpm-playground)
+  - you have correctly input the username and password.
+
+This is an android Studio project.
+Therefore you can use this app and run the LoginScreen activity as default one.
+ 
