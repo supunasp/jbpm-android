@@ -7,10 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.jbpm.mobileclient.taskView.TaskActivity;
+
 import static org.jbpm.mobileclient.R.layout.activity_menu;
 
 
-public class MenuActivity extends Activity {
+public class MenuActivity extends Activity implements View.OnClickListener {
 
     String usrname = "";
     String authHeader = "";
@@ -32,77 +34,66 @@ public class MenuActivity extends Activity {
         authHeader += intent.getExtras().getString("AuthHeader");
         // Dashboard Tasks button
         btn_Tasks = (Button) findViewById(R.id.tasksbutton);
+        btn_Tasks.setOnClickListener(this);
 
         // Dashboard Friends button
         btn_process = (Button) findViewById(R.id.processbutton);
+        btn_process.setOnClickListener(this);
 
         // Dashboard process Dashboard button
         btn_dashboard = (Button) findViewById(R.id.dashboardbutton);
+        btn_dashboard.setOnClickListener(this);
 
         // Dashboard logout button
         btn_logout = (Button) findViewById(R.id.logoutbutton);
+        btn_logout.setOnClickListener(this);
 
-
-        t = (TextView) findViewById(R.id.Username);
+        t = (TextView) findViewById(R.id.username);
 
         t.setText(usrname);
 
-
-        /**
-         * Handling all button click events
-         * */
-
-        // Listening to Tasks button click
-        btn_Tasks.setOnClickListener(new View.OnClickListener() {
-
-
-            @Override
-            public void onClick(View view) {
-                // Launching Tasks Screen
-                Intent i = new Intent(MenuActivity.this, TaskActivity.class);
-                i.putExtra("username", usrname);
-                i.putExtra("AuthHeader", authHeader);
-                startActivity(i);
-
-            }
-        });
-
-        // Listening Process button click
-        btn_process.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                // Launching News Feed Screen
-                Intent i = new Intent(MenuActivity.this, ProcessActivity.class);
-                startActivity(i);
-            }
-        });
-
-        // Listening Dashboard button click
-        btn_dashboard.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                // Launching News Feed Screen
-                Intent i = new Intent(MenuActivity.this, DashboardActivity.class);
-                startActivity(i);
-            }
-        });
-
-        // Listening Dashboard button click
-        btn_logout.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                // Launching News Feed Screen
-                Intent i = new Intent(MenuActivity.this, DashboardActivity.class);
-                startActivity(i);
-            }
-        });
-
-
     }
 
+    @Override
+    public void onClick(View v) {
+
+        Intent intent;
+        switch (v.getId()) {
+            case R.id.tasksbutton:
+                // Tasks button
+
+                intent = new Intent(MenuActivity.this, TaskActivity.class);
+                intent.putExtra("username", usrname);
+                intent.putExtra("AuthHeader", authHeader);
+                startActivity(intent);
+
+                break;
+            case R.id.processbutton:
+                // Process Management button
+
+                intent = new Intent(MenuActivity.this, ProcessActivity.class);
+                startActivity(intent);
+
+                break;
+            case R.id.dashboardbutton:
+                // Dashboard button
+
+                intent = new Intent(MenuActivity.this, DashboardActivity.class);
+                startActivity(intent);
+
+                break;
+            case R.id.logoutbutton:
+                // Logout button
+
+                intent = new Intent(getApplicationContext(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                finish();
+                startActivity(intent);
+
+                break;
+        }
+
+    }
 }
 
 

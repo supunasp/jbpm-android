@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context="org.jbpm.mobileclient.taskView.TaskViewActivity">
+
+    <TextView
+        android:id="@+id/taskviewid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.22"
+        android:gravity="center"
+        android:text="@string/taskId"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/descriptionId"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.09"
+        android:text="@string/taskDescription"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/descriptiondata"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.26"
+        android:text="@string/taskDescriptionData"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/responseId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.05"
+        android:text="@string/taskResults"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/responsedata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.20"
+        android:inputType="text" />
+
+    <GridLayout
+        android:id="@+id/ButtonLayout"
+        android:layout_width="376dp"
+        android:layout_height="77dp"
+        android:layout_weight="0.03">
+
+        <ToggleButton
+            android:id="@+id/claimRelease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_row="3"
+            android:checked="false"
+            android:text="@string/taskClaimButtonId"
+            android:textOff="@string/toggle_turn_off"
+            android:textOn="@string/toggle_turn_on" />
+
+        <Button
+            android:id="@+id/taskStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_row="3"
+            android:checked="false"
+            android:text="@string/taskStartButtonId"
+            android:textOff="@string/start_task"
+            android:textOn="@string/complete_task" />
+
+        <Button
+            android:id="@+id/taskfail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="2"
+            android:layout_row="3"
+            android:text="@string/taskFailButtonId" />
+
+        <Button
+            android:id="@+id/taskComplete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="3"
+            android:layout_row="3"
+            android:text="@string/completeButtonId" />
+    </GridLayout>
+
+
+</LinearLayout>

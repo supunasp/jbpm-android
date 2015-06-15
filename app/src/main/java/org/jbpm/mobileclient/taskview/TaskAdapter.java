@@ -1,7 +1,6 @@
-package org.jbpm.mobileclient.taskview;
+package org.jbpm.mobileclient.taskView;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,16 +32,6 @@ public class TaskAdapter extends ArrayAdapter<TaskObject> {
             convertView = inflater.inflate(R.layout.list_task, null);
         }
 
-        convertView.setOnClickListener(new View.OnClickListener() {
-            int pos = position;
-
-            @Override
-            public void onClick(View v) {
-                Log.v("text", "Task clicked, row %d" + pos);
-
-            }
-        });
-
         TaskObject i = tasksList.get(position);
 
         if (i != null) {
@@ -57,7 +46,7 @@ public class TaskAdapter extends ArrayAdapter<TaskObject> {
                 nameId.setText("Name: ");
             }
             if (nameData != null) {
-                nameData.setText(i.getName());
+                nameData.setText(i.getTaskId() + " - " + i.getName());
             }
             if (detailsId != null) {
                 detailsId.setText("Details: ");
@@ -66,6 +55,8 @@ public class TaskAdapter extends ArrayAdapter<TaskObject> {
                 detailsData.setText(i.getDetails());
             }
         }
+
+
         return convertView;
     }
 }

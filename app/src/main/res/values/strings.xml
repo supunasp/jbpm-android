@@ -10,4 +10,22 @@
     <string name="title_activity_process">Process Management</string>
     <string name="title_activity_logout">Logout</string>
     <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="title_activity_task_view">TaskViewActivity</string>
+    <string name="edit_message">performance</string>
+    <string name="button_send">claim</string>
+    <string name="taskId">ID - NAME</string>
+    <string name="taskDescription">Description :</string>
+    <string name="taskDescriptionData">Description Data</string>
+    <string name="taskResults">Results :</string>
+    <string name="taskResultsData">Results</string>
+    <string name="toggle_turn_on">Release</string>
+    <string name="toggle_turn_off">Claim</string>
+    <string name="completeButtonId">Complete</string>
+    <string name="taskFailButtonId">Fail</string>
+    <string name="taskStartButtonId">Start</string>
+    <string name="taskClaimButtonId">Claim</string>
+    <string name="start_task">Start</string>
+    <string name="complete_task">Complete</string>
+    <string name="userNameId">User Name :</string>
+    <string name="menuButton">Menu</string>
 </resources>

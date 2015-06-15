@@ -1,19 +1,23 @@
-package org.jbpm.mobileclient.taskview;
+package org.jbpm.mobileclient.taskView;
+
+import java.io.Serializable;
 
 /**
  * Created by Supun Athukorala on 6/10/2015.
  */
-public class TaskObject {
+public class TaskObject implements Serializable {
 
     private String taskId;
     private String name;
     private String details;
     private String status;
+    private String taskSummery;
 
 
     public TaskObject() {
 
     }
+
 
     public TaskObject(String taskId, String name, String details, String status) {
 
@@ -22,6 +26,9 @@ public class TaskObject {
         this.details = details;
         this.status = status;
 
+    }
+    public String toString(){
+        return taskId+" "+name+" "+details+" "+status;
     }
 
     public String getTaskId() {
@@ -54,6 +61,16 @@ public class TaskObject {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+
+    public String getTaskSummery() {
+        return taskSummery;
+    }
+
+    public void setTaskSummery(String taskSummery) {
+
+        this.taskSummery = taskSummery;
     }
 
 
