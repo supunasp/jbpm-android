@@ -146,8 +146,9 @@ public class LoginActivity extends Activity {
                 Intent i = new Intent(LoginActivity.this, MenuActivity.class);
                 i.putExtra("username", userName);
                 i.putExtra("AuthHeader", authHeader);
-                finish();
+
                 startActivity(i);
+                finish();
 
             }
         }

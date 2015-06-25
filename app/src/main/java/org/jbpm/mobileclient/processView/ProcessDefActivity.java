@@ -1,4 +1,4 @@
-package org.jbpm.mobileclient.taskView;
+package org.jbpm.mobileclient.processView;
 
 import android.app.ListActivity;
 import android.content.Context;
@@ -27,22 +27,23 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 
-public class TaskActivity extends ListActivity implements View.OnClickListener {
+public class ProcessDefActivity extends ListActivity implements View.OnClickListener {
 
-    TaskAdapter task_adapter;
+    ProcessDefAdapter process_adapter;
     TextView t;
     String usrname;
     String authHeader;
     Button menuButton;
     Intent mIntent;
     // declare class variables
-    private ArrayList<TaskObject> tasks_list = new ArrayList<>();
+    private ArrayList<ProcessObject> process_list = new ArrayList<>();
 
     /**
      * Called when the activity is first created.
@@ -51,7 +52,7 @@ public class TaskActivity extends ListActivity implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task);
+        setContentView(R.layout.activity_process);
 
 
         Intent intent = getIntent();
@@ -61,11 +62,11 @@ public class TaskActivity extends ListActivity implements View.OnClickListener {
         t = (TextView) findViewById(R.id.username);
         t.setText(usrname);
 
-        GetTaskList getTask = new GetTaskList(usrname, authHeader);
+        GetProcessList getTask = new GetProcessList(usrname, authHeader);
         getTask.execute((Void) null);
 
-        task_adapter = new TaskAdapter(this, R.layout.list_task, tasks_list);
-        setListAdapter(task_adapter);
+        process_adapter = new ProcessDefAdapter(this, R.layout.list_process, process_list);
+        setListAdapter(process_adapter);
 
         menuButton = (Button) findViewById(R.id.menubutton);
         menuButton.setOnClickListener(this);
@@ -76,11 +77,11 @@ public class TaskActivity extends ListActivity implements View.OnClickListener {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
 
-        TaskObject taskObject = tasks_list.get(position);
+        ProcessObject processObject = process_list.get(position);
 
-        mIntent = new Intent(this, TaskViewActivity.class);
+        mIntent = new Intent(this, ProcessDefViewActivity.class);
         Bundle mBundle = new Bundle();
-        mBundle.putSerializable("taskObject", taskObject);
+        mBundle.putSerializable("processObject", processObject);
         mIntent.putExtra("username", usrname);
         mIntent.putExtra("AuthHeader", authHeader);
         mIntent.putExtras(mBundle);
@@ -97,13 +98,13 @@ public class TaskActivity extends ListActivity implements View.OnClickListener {
     }
 
 
-    private class GetTaskList extends AsyncTask<Void, Void, Boolean> {
+    private class GetProcessList extends AsyncTask<Void, Void, Boolean> {
         private final String userName;
         private final String authHeader;
 
         HttpURLConnection conn;
 
-        GetTaskList(String userNme, String authHeader) {
+        GetProcessList(String userNme, String authHeader) {
             userName = userNme;
             this.authHeader = authHeader;
         }
@@ -115,14 +116,14 @@ public class TaskActivity extends ListActivity implements View.OnClickListener {
                 String response;
                 URL url;
                 try {
-                    url = new URL("http://10.0.2.2:8080/jbpm-console/rest/task/query?potentialOwner=" + userName);
+                    url = new URL("http://10.0.2.2:8080/jbpm-console/rest/deployment/processes?p=0&s=100");
                     conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");
                     conn.setRequestProperty("Authorization", authHeader);
                     InputStreamReader inputStreamReader = new InputStreamReader((conn.getInputStream()));
                     BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                     response = bufferedReader.readLine();
-                    tasks_list = getTaskList(response);
+                    process_list = getProcessList(response);
                     conn.disconnect();
                     inputStreamReader.close();
                     bufferedReader.close();
@@ -132,16 +133,16 @@ public class TaskActivity extends ListActivity implements View.OnClickListener {
                 }
             } else t.setText("Network Connection is not available");
 
-            if (tasks_list.isEmpty()) {
+            if (process_list.isEmpty()) {
 
                 t.setText("Couldn't get the tasks list! Check ur Connection");
             }
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    task_adapter = new TaskAdapter(TaskActivity.this, R.layout.list_task, tasks_list);
+                    process_adapter = new ProcessDefAdapter(ProcessDefActivity.this, R.layout.list_task, process_list);
                     // display the list.
-                    setListAdapter(task_adapter);
+                    setListAdapter(process_adapter);
                 }
             });
             return true;
@@ -154,66 +155,75 @@ public class TaskActivity extends ListActivity implements View.OnClickListener {
             return networkInfo != null && networkInfo.isConnected();
         }
 
-        private ArrayList<TaskObject> getTaskList(String response) {
+        private ArrayList<ProcessObject> getProcessList(String response) {
 
 
-            ArrayList<TaskObject> tasks_list = new ArrayList<>();
+            ArrayList<ProcessObject> process_list = new ArrayList<>();
+
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder;
 
-            String taskId = "";
+            String processId="";
             String name="";
-            String description="";
-            String status = "";
+            String deployment="";
+            String[] processVariablesArray = new String[0];
+            String version="";
+
 
             try {
-                 builder = factory.newDocumentBuilder();
+                builder = factory.newDocumentBuilder();
 
                 Document document = builder.parse(new InputSource(new StringReader(
                         response)));
 
-                NodeList flowList = document.getElementsByTagName("task-summary");
+                NodeList processList = document.getElementsByTagName("process-definition");
 
-                for (int i = 0; i < flowList.getLength(); i++) {
+                for (int i = 0; i < processList.getLength(); i++) {
 
-                    NodeList childList = flowList.item(i).getChildNodes();
+                    NodeList childList = processList.item(i).getChildNodes();
                     for (int j = 0; j < childList.getLength(); j++) {
                         Node childNode = childList.item(j);
                         if ("id".equals(childNode.getNodeName())) {
-                            taskId=childList.item(j).getTextContent()
+                            processId=childNode.getTextContent()
                                     .trim();
                         }
                         if ("name".equals(childNode.getNodeName())) {
-                            name=childList.item(j).getTextContent()
+                            name=childNode.getTextContent()
                                     .trim();
                         }
-                        if ("description".equals(childNode.getNodeName())) {
-                            description=childList.item(j).getTextContent()
+                        if ("deployment-id".equals(childNode.getNodeName())) {
+                            deployment=childNode.getTextContent()
                                     .trim();
                         }
-                        if ("status".equals(childNode.getNodeName())) {
-                            status=childList.item(j).getTextContent()
+                        if ("version".equals(childNode.getNodeName())) {
+                            version=childNode.getTextContent()
                                     .trim();
                         }
-                    }
-                    if (!status.equals("Completed") && !status.equals("Failed") && !status.equals("Exited") ) {
-                        TaskObject taskObj = new TaskObject(taskId, name, description, status);
-                        taskObj.setTaskSummery(flowList.item(i).toString());
-                        tasks_list.add(taskObj);
+                        if ("variables".equals(childNode.getNodeName())) {
+                            NodeList Variables = childNode.getChildNodes();
+                             processVariablesArray =new String[Variables.getLength()];
+                            for (int k = 0; k < Variables.getLength(); k++) {
+                                NodeList variables =Variables.item(k).getChildNodes();
+                                processVariablesArray[k] =variables.item(0).getTextContent()+" - "+
+                                        variables.item(1).getTextContent();
+                            }
+                        }
 
-                        System.out.println(taskId + " task " + name + ": " + description + " : " + status);
 
                     }
+                    ProcessObject processObject = new ProcessObject(processId, name, deployment, processVariablesArray ,version);
+                    processObject.setProcessSummery(childList.toString());
+                    process_list.add(processObject);
+
+                    System.out.println(processId + " process " + name + ": " + deployment + " : " + Arrays.toString(processVariablesArray));
+
                 }
 
-            } catch (ParserConfigurationException e) {
-                e.printStackTrace();
-            } catch (SAXException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (ParserConfigurationException | IOException | SAXException e) {
                 e.printStackTrace();
             }
-            return tasks_list;
+
+            return process_list;
         }
     }
 

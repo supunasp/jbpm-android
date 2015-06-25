@@ -13,7 +13,7 @@
     <string name="title_activity_task_view">TaskViewActivity</string>
     <string name="edit_message">performance</string>
     <string name="button_send">claim</string>
-    <string name="taskId">ID - NAME</string>
+    <string name="processId">ID - NAME</string>
     <string name="taskDescription">Description :</string>
     <string name="taskDescriptionData">Description Data</string>
     <string name="taskResults">Results :</string>
@@ -28,4 +28,26 @@
     <string name="complete_task">Complete</string>
     <string name="userNameId">User Name :</string>
     <string name="menuButton">Menu</string>
+    <string name="title_activity_process_def">processDefActivity</string>
+    <string name="title_activity_process_ins">processInsActivity</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="title_activity_process_view">processViewActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="userId">User :</string>
+    <string name="example">Example</string>
+    <string name="Process_Variables"> Process Variables :</string>
+    <string name="Deployment"> Deployment :</string>
+    <string name="definitionName"> Definition Name :</string>
+    <string name="definition_Id">  Definition Id :</string>
+    <string name="new_instance">New Instance</string>
+    <string name="closeButton">X</string>
+    <string name="title_activity_process_instances">ProcessInstancesActivity</string>
+    <string name="processInsatances">Process Instances</string>
+    <string name="title_activity_task_complete">TaskCompleteActivity</string>
+    <string name="details">Details</string>
 </resources>

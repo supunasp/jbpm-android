@@ -204,7 +204,7 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
                 try {
                     output =
                             new getTaskDone()
-                                    .execute("http://10.0.2.2:8080/jbpm-console/rest/task/" + taskObject.getTaskId() + "/complete?=" + responseData.getText().toString())
+                                    .execute("http://10.0.2.2:8080/jbpm-console/rest/task/" + taskObject.getTaskId() + "/complete?map_performance=" + responseData.getText().toString())
                                     .get();
 
 

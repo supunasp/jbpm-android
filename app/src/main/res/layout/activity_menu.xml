@@ -24,7 +24,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_gravity="center"
-        android:text="Process Management" />
+        android:text="Process Definitions" />
 
     <Button
         android:id="@+id/dashboardbutton"
@@ -35,6 +35,14 @@
         android:layout_gravity="center"
         android:layout_marginTop="74dp"
         android:text="DashBoard" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Process Instances"
+        android:id="@+id/processInstances"
+        android:layout_below="@+id/processbutton"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/logoutbutton"

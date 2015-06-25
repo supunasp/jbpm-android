@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.jbpm.mobileclient">
+    package="org.jbpm.mobileclient" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -10,7 +10,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name"
@@ -22,14 +22,28 @@
             android:name=".taskView.TaskActivity"
             android:label="@string/title_activity_task" />
         <activity
-            android:name=".ProcessActivity"
-            android:label="@string/title_activity_process" />
-        <activity
             android:name=".DashboardActivity"
             android:label="@string/title_activity_dashboard" />
         <activity
             android:name=".taskView.TaskViewActivity"
-            android:label="@string/title_activity_task_view"></activity>
+            android:label="@string/title_activity_task_view" />
+        <activity
+            android:name=".processView.ProcessDefActivity"
+            android:label="@string/title_activity_process" >
+        </activity>
+        <activity
+            android:name=".processView.ProcessDefViewActivity"
+            android:label="@string/title_activity_process_view" >
+        </activity>
+        <activity
+            android:name=".processView.ProcessInsActivity"
+            android:label="@string/title_activity_process_instances" >
+        </activity>
+        <activity
+            android:name=".taskView.TaskCompleteActivity"
+            android:label="@string/title_activity_task_complete"
+            android:theme="@android:style/Theme.NoTitleBar">
+        </activity>
     </application>
 
 </manifest>

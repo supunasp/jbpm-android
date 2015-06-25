@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+
+    android:padding="6dip">
+    <!-- ProcessObject Name -->
+    <TextView
+        android:id="@+id/nametext"
+
+        android:layout_width="wrap_content"
+        android:layout_height="26dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:textStyle="bold" />
+
+    <!-- Actual ProcessObject Name Data -->
+    <TextView
+        android:id="@+id/namedata"
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/nametext"
+        android:ellipsize="marquee"
+        android:singleLine="true" />
+
+    <!-- Description Tag -->
+    <TextView
+        android:id="@+id/detailstext"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/nametext"
+        android:singleLine="false"
+        android:textStyle="bold" />
+    <!-- This is the actual description -->
+    <TextView
+        android:id="@+id/detailsdata"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/detailstext"
+        android:singleLine="false" />
+</RelativeLayout>

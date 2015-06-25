@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.jbpm.mobileclient.processView.ProcessDefActivity;
+import org.jbpm.mobileclient.processView.ProcessInsActivity;
 import org.jbpm.mobileclient.taskView.TaskActivity;
 
 import static org.jbpm.mobileclient.R.layout.activity_menu;
@@ -18,6 +20,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
     String authHeader = "";
     Button btn_Tasks;
     Button btn_process;
+    Button btn_process_Instances;
     Button btn_dashboard;
     Button btn_logout;
     TextView t;
@@ -36,9 +39,15 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         btn_Tasks = (Button) findViewById(R.id.tasksbutton);
         btn_Tasks.setOnClickListener(this);
 
-        // Dashboard Friends button
+        // Dashboard processDefinitions button
         btn_process = (Button) findViewById(R.id.processbutton);
         btn_process.setOnClickListener(this);
+
+        // Dashboard process Instances button
+        btn_process_Instances = (Button) findViewById(R.id.processInstances);
+        btn_process_Instances.setOnClickListener(this);
+
+
 
         // Dashboard process Dashboard button
         btn_dashboard = (Button) findViewById(R.id.dashboardbutton);
@@ -71,7 +80,19 @@ public class MenuActivity extends Activity implements View.OnClickListener {
             case R.id.processbutton:
                 // Process Management button
 
-                intent = new Intent(MenuActivity.this, ProcessActivity.class);
+                intent = new Intent(MenuActivity.this, ProcessDefActivity.class);
+                intent.putExtra("username", usrname);
+                intent.putExtra("AuthHeader", authHeader);
+                startActivity(intent);
+
+                break;
+
+            case R.id.processInstances:
+                // Process process Instances button
+
+                intent = new Intent(MenuActivity.this, ProcessInsActivity.class);
+                intent.putExtra("username", usrname);
+                intent.putExtra("AuthHeader", authHeader);
                 startActivity(intent);
 
                 break;
