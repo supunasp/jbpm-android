@@ -7,7 +7,9 @@ the idea of the project is to create a mobile UI of the jBPM-console where mobil
 the jBPM-console. 
 The jBPM core engine itself is a lightweight workflow engine. Therefore it can be run on android as well. Therefore apart 
 from the mobile UI, a prototype of jBPM on android will be also created where user can interact withoutconnect to the 
-jBPM-console.   
+jBPM-console.
+For more details and everything, visit the blog for pogress of the project.
+      http://aspedgsoc.blogspot.com/
 
 This app uses the remote REST API to connect to the execution server of the jBPM Console and execute the Evaluation process there.
  
