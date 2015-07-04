@@ -134,7 +134,13 @@ public class TaskActivity extends ListActivity implements View.OnClickListener {
 
             if (tasks_list.isEmpty()) {
 
-                t.setText("Couldn't get the tasks list! Check ur Connection");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        t.setText("Couldn't get the tasks list! Check ur Connection");
+                    }
+                });
+
             }
             runOnUiThread(new Runnable() {
                 @Override
@@ -200,17 +206,10 @@ public class TaskActivity extends ListActivity implements View.OnClickListener {
                         TaskObject taskObj = new TaskObject(taskId, name, description, status);
                         taskObj.setTaskSummery(flowList.item(i).toString());
                         tasks_list.add(taskObj);
-
-                        System.out.println(taskId + " task " + name + ": " + description + " : " + status);
-
                     }
                 }
 
-            } catch (ParserConfigurationException e) {
-                e.printStackTrace();
-            } catch (SAXException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (ParserConfigurationException | IOException | SAXException e) {
                 e.printStackTrace();
             }
             return tasks_list;

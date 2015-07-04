@@ -206,8 +206,6 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
                             new getTaskDone()
                                     .execute("http://10.0.2.2:8080/jbpm-console/rest/task/" + taskObject.getTaskId() + "/complete?map_performance=" + responseData.getText().toString())
                                     .get();
-
-
                 } catch (InterruptedException | ExecutionException e) {
                     e.printStackTrace();
                 }
@@ -229,7 +227,6 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
             Toast.makeText(getApplicationContext(),
                     "response is " + responseMsg, Toast.LENGTH_LONG)
                     .show();
-            System.out.println("response is " + responseMsg);
         }
         return responseMsg;
     }
@@ -273,7 +270,6 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
 
                 } catch (IOException e) {
                     e.printStackTrace();
-
                 }
             } else descriptionData.setText("Network Connection is not available");
             return line;
@@ -282,10 +278,7 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
-
         }
-
     }
 }
 

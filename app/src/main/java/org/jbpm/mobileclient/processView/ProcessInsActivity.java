@@ -140,7 +140,6 @@ public class ProcessInsActivity extends ListActivity implements View.OnClickList
 
             ArrayList<ProcessObject> process_list = new ArrayList<>();
 
-            System.out.println(response);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder;
 
@@ -183,19 +182,13 @@ public class ProcessInsActivity extends ListActivity implements View.OnClickList
                         }
 
                     }
-                    System.out.println(processInsId+" : "+processVersion+" : "+processName+" : "+processExId);
-
                     ProcessObject processObject = new ProcessObject(processInsId, processName, processExId ,processVersion);
                     processObject.setProcessSummery(processInsNode.toString());
                     process_list.add(processObject);
-
                 }
-
-
             } catch (ParserConfigurationException | XPathExpressionException | IOException | SAXException e) {
                 e.printStackTrace();
             }
-
             return process_list;
         }
     }

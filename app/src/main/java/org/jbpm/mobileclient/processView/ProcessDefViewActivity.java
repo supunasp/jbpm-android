@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
 
@@ -54,15 +53,11 @@ public class ProcessDefViewActivity extends Activity implements View.OnClickList
         TextView deploymentOd = (TextView) findViewById(R.id.getDepolyment);
         deploymentOd.setText("Deployment : " + processObject.getDeploymentId());
 
-
         ListView listView = (ListView) findViewById(R.id.processVariables);
 
         String[] processVariables = processObject.getProcessVariables();
-        System.out.println(Arrays.toString(processVariables));
-        String[] processVariablesArray = getProcessVariables(processVariables);
-
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, processVariablesArray);
+                android.R.layout.simple_list_item_1, android.R.id.text1, processVariables);
         listView.setAdapter(adapter);
 
         Button newIns = (Button) findViewById(R.id.ButtonInsStart);
@@ -77,15 +72,6 @@ public class ProcessDefViewActivity extends Activity implements View.OnClickList
         intent.putExtra("AuthHeader", authHeader);
 
     }
-
-    private String[] getProcessVariables(String[] processVariablesArray) {
-
-        String[] newProcessVariablesArray = new String[processVariablesArray.length];
-
-        return processVariablesArray;
-    }
-
-
     @Override
     public void onClick(View v) {
 
@@ -102,14 +88,13 @@ public class ProcessDefViewActivity extends Activity implements View.OnClickList
                 } catch (InterruptedException | ExecutionException e) {
                     e.printStackTrace();
                 }
-
-
-                System.out.println(output);
-
-                Toast.makeText(getApplicationContext(),
-                        "response is " + output, Toast.LENGTH_LONG)
-                        .show();
-
+                String responseMsg;
+                if (output.length() > 10) {
+                    responseMsg = output.substring(output.indexOf("<status>") + 8, output.indexOf("</status>"));
+                    Toast.makeText(getApplicationContext(),
+                            "response is " + responseMsg, Toast.LENGTH_LONG)
+                            .show();
+                }
                 break;
             case R.id.closeButton:
                 //Close button
@@ -167,9 +152,6 @@ public class ProcessDefViewActivity extends Activity implements View.OnClickList
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
-
         }
-
     }
 }

@@ -2,6 +2,7 @@ package org.jbpm.mobileclient;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,27 +38,34 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         authHeader += intent.getExtras().getString("AuthHeader");
         // Dashboard Tasks button
         btn_Tasks = (Button) findViewById(R.id.tasksbutton);
+        btn_Tasks.setShadowLayer(1, 0, 0, Color.BLACK);
         btn_Tasks.setOnClickListener(this);
 
         // Dashboard processDefinitions button
         btn_process = (Button) findViewById(R.id.processbutton);
+        btn_process.setShadowLayer(1, 0, 0, Color.BLACK);
         btn_process.setOnClickListener(this);
 
         // Dashboard process Instances button
         btn_process_Instances = (Button) findViewById(R.id.processInstances);
+        btn_process_Instances.setShadowLayer(1, 0, 0, Color.BLACK);
         btn_process_Instances.setOnClickListener(this);
 
 
 
         // Dashboard process Dashboard button
         btn_dashboard = (Button) findViewById(R.id.dashboardbutton);
+        btn_dashboard.setShadowLayer(1, 0, 0, Color.BLACK);
         btn_dashboard.setOnClickListener(this);
+
 
         // Dashboard logout button
         btn_logout = (Button) findViewById(R.id.logoutbutton);
+        btn_logout.setShadowLayer(1, 0, 0, Color.BLACK);
         btn_logout.setOnClickListener(this);
 
         t = (TextView) findViewById(R.id.username);
+        t.setShadowLayer(1,0,0, Color.BLACK);
 
         t.setText(usrname);
 
@@ -100,7 +108,10 @@ public class MenuActivity extends Activity implements View.OnClickListener {
                 // Dashboard button
 
                 intent = new Intent(MenuActivity.this, DashboardActivity.class);
+                intent.putExtra("username", usrname);
+                intent.putExtra("AuthHeader", authHeader);
                 startActivity(intent);
+
 
                 break;
             case R.id.logoutbutton:

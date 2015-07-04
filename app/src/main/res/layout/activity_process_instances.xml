@@ -38,7 +38,7 @@
         android:layout_gravity="center_horizontal"
         android:rowCount="1"
         android:columnCount="2"
-        android:id="@+id/gridLayout2" >
+        android:id="@+id/usergrid" >
 
         <TextView
             android:id="@+id/usernameId"

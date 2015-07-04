@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Supun Prabhath on 6/25/2015.
+ * Project MobileClient
  */
 public class ProcessInsAdaptor extends ArrayAdapter<ProcessObject> {
 
@@ -22,7 +23,6 @@ private ArrayList<ProcessObject> processList;
 public ProcessInsAdaptor(Context context, int textViewResourceId, ArrayList<ProcessObject> processList) {
         super(context, textViewResourceId, processList);
         this.processList = processList;
-
         }
 
 public View getView(final int position, View convertView, ViewGroup parent) {

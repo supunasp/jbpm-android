@@ -35,10 +35,6 @@ public class TaskObject implements Serializable {
         return taskId;
     }
 
-    public void setTaskId(String taskId) {
-        this.taskId = taskId;
-    }
-
     public String getName() {
         return name;
     }
@@ -51,21 +47,12 @@ public class TaskObject implements Serializable {
         return details;
     }
 
-    public void setDetails(String details) {
-        this.details = details;
-    }
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-
-    public String getTaskSummery() {
-        return taskSummery;
     }
 
     public void setTaskSummery(String taskSummery) {

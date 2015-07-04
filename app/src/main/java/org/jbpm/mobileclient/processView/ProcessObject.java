@@ -72,11 +72,6 @@ public class ProcessObject implements Serializable{
         return processVariables;
     }
 
-
-    public String getProcessSummery() {
-        return processSummery;
-    }
-
     public void setProcessSummery(String processSummery) {
 
         this.processSummery = processSummery;

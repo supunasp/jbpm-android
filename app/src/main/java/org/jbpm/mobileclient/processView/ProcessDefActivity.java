@@ -27,7 +27,6 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -208,15 +207,10 @@ public class ProcessDefActivity extends ListActivity implements View.OnClickList
                                         variables.item(1).getTextContent();
                             }
                         }
-
-
                     }
                     ProcessObject processObject = new ProcessObject(processId, name, deployment, processVariablesArray ,version);
                     processObject.setProcessSummery(childList.toString());
                     process_list.add(processObject);
-
-                    System.out.println(processId + " process " + name + ": " + deployment + " : " + Arrays.toString(processVariablesArray));
-
                 }
 
             } catch (ParserConfigurationException | IOException | SAXException e) {

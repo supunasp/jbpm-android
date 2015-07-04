@@ -40,14 +40,16 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="userId">User :</string>
     <string name="example">Example</string>
-    <string name="Process_Variables"> Process Variables :</string>
+    <string name="Process_Variables"> Process Variables </string>
     <string name="Deployment"> Deployment :</string>
-    <string name="definitionName"> Definition Name :</string>
-    <string name="definition_Id">  Definition Id :</string>
+    <string name="definitionName"> Definition Name </string>
+    <string name="definition_Id">  Definition Id </string>
     <string name="new_instance">New Instance</string>
     <string name="closeButton">X</string>
     <string name="title_activity_process_instances">ProcessInstancesActivity</string>
     <string name="processInsatances">Process Instances</string>
     <string name="title_activity_task_complete">TaskCompleteActivity</string>
     <string name="details">Details</string>
+    <string name="logo">logo</string>
+    <string name="jbpmName">jBPM</string>
 </resources>

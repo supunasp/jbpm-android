@@ -1,40 +1,14 @@
 package org.jbpm.mobileclient.connection;
 
 
-import org.kie.api.task.model.TaskSummary;
-import org.w3c.dom.Document;
-
-import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathFactory;
 
 /**
  * Created by Supun Athukorala on 6/8/2015.
+ * Project MobileClient
  */
 public class ClientRestEngine {
 
-    private static TaskSummary findTask(List<TaskSummary> tasks, long processInstanceId) {
-        for (TaskSummary task : tasks) {
-            if (task.getProcessInstanceId() == processInstanceId) {
-                return task;
-            }
-        }
-        throw new RuntimeException("Could not find task for process instance "
-                + processInstanceId + " [" + tasks.size() + " task(s) in total]");
-    }
-
-    public static String getXPathValue(String xml, String expression) throws Exception {
-        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = builderFactory.newDocumentBuilder();
-        Document xmlDocument = builder.parse(new ByteArrayInputStream(xml.getBytes()));
-        XPath xPath = XPathFactory.newInstance().newXPath();
-        return xPath.compile(expression).evaluate(xmlDocument);
-    }
 
     /**
      * <p>
@@ -243,7 +217,6 @@ public class ClientRestEngine {
                 encode3to4(source, d + off, len - d, outBuff, e);
                 e += 4;
             }
-
             if (e <= outBuff.length - 1) {
                 byte[] finalOut = new byte[e];
                 System.arraycopy(outBuff, 0, finalOut, 0, e);

@@ -6,16 +6,25 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:useDefaultMargins="true"
+    android:alignmentMode="alignBounds"
     tools:context="org.jbpm.mobileclient.MenuActivity">
 
     <Button
         android:id="@+id/tasksbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Tasks"
         android:layout_above="@+id/processbutton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="82dp"
-        android:text="Tasks" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:bottom="3dp"
+        android:top="3dp"
+        android:shape="rectangle"
+        android:radius="2dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        />
 
     <Button
         android:id="@+id/processbutton"
@@ -24,17 +33,31 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_gravity="center"
-        android:text="Process Definitions" />
+        android:text="Process Definitions"
+        android:bottom="3dp"
+        android:top="3dp"
+        android:shape="rectangle"
+        android:radius="2dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
+    />
 
     <Button
         android:id="@+id/dashboardbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/processbutton"
-        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:layout_marginTop="74dp"
-        android:text="DashBoard" />
+        android:text="DashBoard"
+        android:layout_below="@+id/processInstances"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:bottom="3dp"
+        android:top="3dp"
+        android:shape="rectangle"
+        android:radius="2dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <Button
         android:layout_width="match_parent"
@@ -42,7 +65,13 @@
         android:text="Process Instances"
         android:id="@+id/processInstances"
         android:layout_below="@+id/processbutton"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:bottom="3dp"
+        android:top="3dp"
+        android:shape="rectangle"
+        android:radius="2dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <Button
         android:id="@+id/logoutbutton"
@@ -56,10 +85,13 @@
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/tasksbutton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="15dp"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/tasksbutton">
 
         <TextView
             android:id="@+id/username"

@@ -31,7 +31,6 @@ public class ProcessDefAdapter extends ArrayAdapter<ProcessObject> {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.list_process, null);
         }
-
         ProcessObject i = processList.get(position);
 
         if (i != null) {

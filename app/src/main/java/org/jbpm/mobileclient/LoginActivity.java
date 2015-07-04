@@ -127,29 +127,22 @@ public class LoginActivity extends Activity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-
             authHeader = "Basic " + ClientRestEngine.Base64Util.encode(userName + ":" + mPassword);
             return true;
         }
-
         @Override
         protected void onPostExecute(final Boolean success) {
             authTask = null;
-
-
             if (!success) {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             } else {
-
-
                 Intent i = new Intent(LoginActivity.this, MenuActivity.class);
                 i.putExtra("username", userName);
                 i.putExtra("AuthHeader", authHeader);
 
                 startActivity(i);
                 finish();
-
             }
         }
 
