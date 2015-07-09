@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.jbpm.mobileclient.MenuActivity;
 import org.jbpm.mobileclient.R;
@@ -111,10 +112,24 @@ public class ProcessInsActivity extends ListActivity implements View.OnClickList
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } else
+            } else runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(),
+                            "Network Connection is not available ", Toast.LENGTH_LONG)
+                            .show();
+                }});
 
             if (process_list.isEmpty()) {
 
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),
+                                "Couldn't get the process Instances list! Check ur Connection ", Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
 
             }
             runOnUiThread(new Runnable() {

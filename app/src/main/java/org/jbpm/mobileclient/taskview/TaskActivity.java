@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.jbpm.mobileclient.MenuActivity;
 import org.jbpm.mobileclient.R;
@@ -130,94 +131,102 @@ public class TaskActivity extends ListActivity implements View.OnClickListener {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } else t.setText("Network Connection is not available");
-
-            if (tasks_list.isEmpty()) {
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        t.setText("Couldn't get the tasks list! Check ur Connection");
-                    }
-                });
-
-            }
-            runOnUiThread(new Runnable() {
+            } else runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    task_adapter = new TaskAdapter(TaskActivity.this, R.layout.list_task, tasks_list);
-                    // display the list.
-                    setListAdapter(task_adapter);
-                }
-            });
-            return true;
-        }
+                    Toast.makeText(getApplicationContext(),
+                            "Network Connection is not available ", Toast.LENGTH_LONG)
+                            .show();
+                }});
 
-        public boolean isNetworkAvailable() {
-            ConnectivityManager cm = (ConnectivityManager)
-                    getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-            return networkInfo != null && networkInfo.isConnected();
-        }
+                    if (tasks_list.isEmpty()) {
 
-        private ArrayList<TaskObject> getTaskList(String response) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(),
+                                        "Couldn't get the tasks list! Check ur Connection ", Toast.LENGTH_LONG)
+                                        .show();
+                            }
+                        });
 
-
-            ArrayList<TaskObject> tasks_list = new ArrayList<>();
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder;
-
-            String taskId = "";
-            String name="";
-            String description="";
-            String status = "";
-
-            try {
-                 builder = factory.newDocumentBuilder();
-
-                Document document = builder.parse(new InputSource(new StringReader(
-                        response)));
-
-                NodeList flowList = document.getElementsByTagName("task-summary");
-
-                for (int i = 0; i < flowList.getLength(); i++) {
-
-                    NodeList childList = flowList.item(i).getChildNodes();
-                    for (int j = 0; j < childList.getLength(); j++) {
-                        Node childNode = childList.item(j);
-                        if ("id".equals(childNode.getNodeName())) {
-                            taskId=childList.item(j).getTextContent()
-                                    .trim();
-                        }
-                        if ("name".equals(childNode.getNodeName())) {
-                            name=childList.item(j).getTextContent()
-                                    .trim();
-                        }
-                        if ("description".equals(childNode.getNodeName())) {
-                            description=childList.item(j).getTextContent()
-                                    .trim();
-                        }
-                        if ("status".equals(childNode.getNodeName())) {
-                            status=childList.item(j).getTextContent()
-                                    .trim();
-                        }
                     }
-                    if (!status.equals("Completed") && !status.equals("Failed") && !status.equals("Exited") ) {
-                        TaskObject taskObj = new TaskObject(taskId, name, description, status);
-                        taskObj.setTaskSummery(flowList.item(i).toString());
-                        tasks_list.add(taskObj);
-                    }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            task_adapter = new TaskAdapter(TaskActivity.this, R.layout.list_task, tasks_list);
+                            // display the list.
+                            setListAdapter(task_adapter);
+                        }
+                    });
+                    return true;
                 }
 
-            } catch (ParserConfigurationException | IOException | SAXException e) {
-                e.printStackTrace();
+                public boolean isNetworkAvailable() {
+                    ConnectivityManager cm = (ConnectivityManager)
+                            getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+                    return networkInfo != null && networkInfo.isConnected();
+                }
+
+                private ArrayList<TaskObject> getTaskList(String response) {
+
+
+                    ArrayList<TaskObject> tasks_list = new ArrayList<>();
+                    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder builder;
+
+                    String taskId = "";
+                    String name = "";
+                    String description = "";
+                    String status = "";
+
+                    try {
+                        builder = factory.newDocumentBuilder();
+
+                        Document document = builder.parse(new InputSource(new StringReader(
+                                response)));
+
+                        NodeList flowList = document.getElementsByTagName("task-summary");
+
+                        for (int i = 0; i < flowList.getLength(); i++) {
+
+                            NodeList childList = flowList.item(i).getChildNodes();
+                            for (int j = 0; j < childList.getLength(); j++) {
+                                Node childNode = childList.item(j);
+                                if ("id".equals(childNode.getNodeName())) {
+                                    taskId = childList.item(j).getTextContent()
+                                            .trim();
+                                }
+                                if ("name".equals(childNode.getNodeName())) {
+                                    name = childList.item(j).getTextContent()
+                                            .trim();
+                                }
+                                if ("description".equals(childNode.getNodeName())) {
+                                    description = childList.item(j).getTextContent()
+                                            .trim();
+                                }
+                                if ("status".equals(childNode.getNodeName())) {
+                                    status = childList.item(j).getTextContent()
+                                            .trim();
+                                }
+                            }
+                            if (!status.equals("Completed") && !status.equals("Failed") && !status.equals("Exited")) {
+                                TaskObject taskObj = new TaskObject(taskId, name, description, status);
+                                taskObj.setTaskSummery(flowList.item(i).toString());
+                                tasks_list.add(taskObj);
+                            }
+                        }
+
+                    } catch (ParserConfigurationException | IOException | SAXException e) {
+                        e.printStackTrace();
+                    }
+                    return tasks_list;
+                }
             }
-            return tasks_list;
+
+
         }
-    }
-
-
-}
 
 
 

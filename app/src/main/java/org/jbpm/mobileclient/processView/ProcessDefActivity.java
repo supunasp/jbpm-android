@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.jbpm.mobileclient.MenuActivity;
 import org.jbpm.mobileclient.R;
@@ -130,11 +131,26 @@ public class ProcessDefActivity extends ListActivity implements View.OnClickList
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } else t.setText("Network Connection is not available");
+            } else runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(),
+                            "Network Connection is not available ", Toast.LENGTH_LONG)
+                            .show();
+                }
+            });
 
             if (process_list.isEmpty()) {
 
-                t.setText("Couldn't get the tasks list! Check ur Connection");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),
+                                "Couldn't get the process Definitions list! Check ur Connection ", Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+
             }
             runOnUiThread(new Runnable() {
                 @Override

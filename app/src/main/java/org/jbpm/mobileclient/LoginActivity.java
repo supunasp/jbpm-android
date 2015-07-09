@@ -60,12 +60,6 @@ public class LoginActivity extends Activity {
 
     }
 
-
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid username, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
     public void attemptLogin() {
         if (authTask != null) {
             return;
@@ -140,7 +134,6 @@ public class LoginActivity extends Activity {
                 Intent i = new Intent(LoginActivity.this, MenuActivity.class);
                 i.putExtra("username", userName);
                 i.putExtra("AuthHeader", authHeader);
-
                 startActivity(i);
                 finish();
             }

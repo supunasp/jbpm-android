@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -89,6 +90,16 @@ public class DashboardActivity extends Activity implements View.OnClickListener 
         totalTasks = (TextView) findViewById(R.id.toatlTasks);
         completedTasks = (TextView) findViewById(R.id.tasksCompleted);
 
+        totalInstances.setText(totalInstancesNo);
+        activeInstances.setText(activeInstancesNo);
+        completedInstances.setText(completedInstancesNo);
+        abortedInstances.setText(abortedInstancesNo);
+        pendingInstances.setText(pendingInstancesNo);
+        suspendedInstances.setText(suspendedInstanceNo);
+
+        totalTasks.setText(totalTasksNo);
+        completedTasks.setText(completedTasksNo);
+
         GetTaskList getTask = new GetTaskList(usrname, authHeader);
         getTask.execute((Void) null);
 
@@ -160,7 +171,24 @@ public class DashboardActivity extends Activity implements View.OnClickListener 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } else t.setText("Network Connection is not available");
+            } else runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(),
+                            "Network Connection is not available ", Toast.LENGTH_LONG)
+                            .show();
+
+                    totalInstances.setText(totalInstancesNo);
+                    activeInstances.setText(activeInstancesNo);
+                    completedInstances.setText(completedInstancesNo);
+                    abortedInstances.setText(abortedInstancesNo);
+                    pendingInstances.setText(pendingInstancesNo);
+                    suspendedInstances.setText(suspendedInstanceNo);
+
+                    totalTasks.setText(totalTasksNo);
+                    completedTasks.setText(completedTasksNo);
+                }
+            });
             return true;
         }
 
