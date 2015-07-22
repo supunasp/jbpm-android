@@ -51,13 +51,13 @@ public class ProcessDefViewActivity extends Activity implements View.OnClickList
         processDefName.setText(processObject.getName());
 
         TextView deploymentOd = (TextView) findViewById(R.id.getDepolyment);
-        deploymentOd.setText("Deployment : " + processObject.getDeploymentId());
+        deploymentOd.setText("" + processObject.getDeploymentId());
 
         ListView listView = (ListView) findViewById(R.id.processVariables);
 
         String[] processVariables = processObject.getProcessVariables();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, processVariables);
+                android.R.layout.simple_list_item_2, android.R.id.text1, processVariables);
         listView.setAdapter(adapter);
 
         Button newIns = (Button) findViewById(R.id.ButtonInsStart);

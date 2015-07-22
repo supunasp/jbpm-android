@@ -5,69 +5,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="org.jbpm.mobileclient.DashboardActivity"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="#1c2125">
 
     <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:id="@+id/gridmain"
-        >
-
-        <TextView
-            android:layout_width="278dp"
-            android:layout_height="48dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Process &amp; Task Dashboard"
-            android:id="@+id/textView4"
-            android:layout_columnSpan="2" />
-
-        <Button
-            android:id="@+id/closeButton"
-            android:layout_width="62dp"
-            android:layout_height="wrap_content"
-            android:text="X"
-            android:layout_gravity="right" />
-    </GridLayout>
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:bottom="3dp"
-        android:top="3dp"
-        android:shape="rectangle"
-        android:radius="2dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:id="@+id/grid_header">
-
-        <TextView
-            android:id="@+id/textView21"
-            android:layout_width="171dp"
-            android:layout_height="46dp"
-            android:layout_column="0"
-            android:layout_row="0"
-            android:text="@string/userNameId"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:background="#0c0f12">
 
         <TextView
             android:id="@+id/dashUsername"
-            android:layout_width="180dp"
-            android:layout_height="48dp"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
             android:layout_column="1"
             android:layout_row="0"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_gravity="left"
-            android:text="@string/example" />
+            android:text="User Name"
+            android:textColor="#fff"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:fontFamily="sans-serif-condensed" />
+
+        <Button
+            android:id="@+id/closeButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="X"
+            android:layout_gravity="center|left|right"
+            android:background="@drawable/btn_live_dark"
+            android:gravity="center" />
     </GridLayout>
 
     <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="58dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Process &amp; Task Dashboard"
+        android:id="@+id/textView4"
+        android:textColor="#95a0ae"
+        android:gravity="center_vertical|center_horizontal"
+        android:fontFamily="sans-serif-condensed" />
+
+    <TextView
         android:id="@+id/textView19"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_width="fill_parent"
         android:layout_gravity="center_horizontal"
         android:text="Tasks"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:padding="12dp"
+        android:background="@drawable/button_dd"
+        android:textColor="#0c0f12"
+        android:fontFamily="sans-serif-condensed" />
 
     <GridLayout
         android:layout_width="match_parent"
@@ -75,7 +67,9 @@
         android:rowCount="2"
         android:columnCount="3"
         android:id="@+id/tasksGrid"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
 
         <TextView
             android:layout_width="157dp"
@@ -85,17 +79,24 @@
             android:id="@+id/textView5"
             android:layout_row="0"
             android:layout_column="0"
-            android:layout_columnSpan="2" />
+            android:layout_columnSpan="2"
+            android:fontFamily="sans-serif-condensed"
+            android:padding="4dp"
+            android:textColor="#95a0ae" />
 
         <TextView
             android:id="@+id/toatlTasks"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="35dp"
             android:layout_gravity="center_horizontal"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_row="0"
-            android:layout_column="2" />
+            android:layout_column="2"
+            android:fontFamily="sans-serif-condensed"
+            android:padding="4dp"
+            android:textColor="#fff"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="26dp"
@@ -113,7 +114,10 @@
             android:text="Tasks Completed "
             android:id="@+id/textView3"
             android:layout_row="1"
-            android:layout_column="0" />
+            android:layout_column="0"
+            android:fontFamily="sans-serif-condensed"
+            android:padding="4dp"
+            android:textColor="#95a0ae" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -132,32 +136,46 @@
             android:text="tasksCompleted"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_row="1"
-            android:layout_column="2" />
+            android:layout_column="2"
+            android:fontFamily="sans-serif-condensed"
+            android:padding="4dp"
+            android:textColor="#fff"
+            android:textStyle="bold" />
     </GridLayout>
 
     <TextView
         android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
         android:text="Process Instances"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_gravity="center_horizontal" />
+        android:padding="12dp"
+        android:background="@drawable/button_dd"
+        android:textColor="#0c0f12"
+        android:fontFamily="sans-serif-condensed" />
+
     <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="220dp"
         android:orientation="vertical"
         android:rowCount="7"
         android:columnCount="3"
-        android:id="@+id/process_grid">
+        android:id="@+id/process_grid"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
         <TextView
             android:layout_width="157dp"
             android:layout_height="35dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="  Total"
+            android:text="Total"
             android:id="@+id/textView22"
             android:layout_row="0"
             android:layout_column="0"
-            android:layout_columnSpan="2" />
+            android:layout_columnSpan="2"
+            android:fontFamily="sans-serif-condensed"
+            android:padding="4dp"
+            android:textColor="#95a0ae" />
 
         <TextView
             android:id="@+id/totalInstances"
@@ -167,7 +185,11 @@
             android:text="totalInstances"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_row="0"
-            android:layout_column="2" />
+            android:layout_column="2"
+            android:fontFamily="sans-serif-condensed"
+            android:padding="4dp"
+            android:textColor="#fff"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="26dp"
@@ -182,10 +204,13 @@
             android:layout_width="171dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=" Completed"
+            android:text="Completed"
             android:id="@+id/textView9"
             android:layout_row="1"
-            android:layout_column="0" />
+            android:layout_column="0"
+            android:fontFamily="sans-serif-condensed"
+            android:padding="4dp"
+            android:textColor="#95a0ae" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -204,16 +229,23 @@
             android:text="instancesCompleted"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_row="1"
-            android:layout_column="2" />
+            android:layout_column="2"
+            android:fontFamily="sans-serif-condensed"
+            android:padding="4dp"
+            android:textColor="#fff"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=" Active"
+            android:text="Active"
             android:id="@+id/textView11"
             android:layout_row="2"
-            android:layout_column="0" />
+            android:layout_column="0"
+            android:fontFamily="sans-serif-condensed"
+            android:padding="4dp"
+            android:textColor="#95a0ae" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -232,16 +264,23 @@
             android:text="instancesActive"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_row="2"
-            android:layout_column="2" />
+            android:layout_column="2"
+            android:fontFamily="sans-serif-condensed"
+            android:padding="4dp"
+            android:textColor="#fff"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="  Pending"
+            android:text="Pending"
             android:id="@+id/textView13"
             android:layout_row="3"
-            android:layout_column="0" />
+            android:layout_column="0"
+            android:fontFamily="sans-serif-condensed"
+            android:padding="4dp"
+            android:textColor="#95a0ae" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -260,16 +299,23 @@
             android:text="instancesPending"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_row="3"
-            android:layout_column="2" />
+            android:layout_column="2"
+            android:fontFamily="sans-serif-condensed"
+            android:padding="4dp"
+            android:textColor="#fff"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="169dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=" Suspended"
+            android:text="Suspended"
             android:id="@+id/textView15"
             android:layout_row="4"
-            android:layout_column="0" />
+            android:layout_column="0"
+            android:fontFamily="sans-serif-condensed"
+            android:padding="4dp"
+            android:textColor="#95a0ae" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -288,15 +334,22 @@
             android:text="instancesSuspended"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_row="4"
-            android:layout_column="2" />
+            android:layout_column="2"
+            android:fontFamily="sans-serif-condensed"
+            android:padding="4dp"
+            android:textColor="#fff"
+            android:textStyle="bold" />
         <TextView
             android:layout_width="169dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=" Aborted"
+            android:text="Aborted"
             android:id="@+id/textView17"
             android:layout_row="5"
-            android:layout_column="0" />
+            android:layout_column="0"
+            android:fontFamily="sans-serif-condensed"
+            android:padding="4dp"
+            android:textColor="#95a0ae" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -316,7 +369,11 @@
             android:text="instancesAborted"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_row="5"
-            android:layout_column="2" />
+            android:layout_column="2"
+            android:fontFamily="sans-serif-condensed"
+            android:padding="4dp"
+            android:textColor="#fff"
+            android:textStyle="bold" />
     </GridLayout>
 
 </LinearLayout>

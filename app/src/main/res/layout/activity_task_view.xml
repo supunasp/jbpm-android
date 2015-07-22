@@ -5,35 +5,50 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:weightSum="1"
-    tools:context="org.jbpm.mobileclient.taskView.TaskViewActivity">
+    android:background="#1c2125"
+    tools:context="org.jbpm.mobileclient.taskView.TaskViewActivity"
+    android:gravity="center_horizontal">
 
     <TextView
         android:id="@+id/taskviewid"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.22"
         android:gravity="center"
         android:text="@string/processId"
+        android:background="#0c0f12"
+        android:textColor="#fff"
+        android:paddingLeft="20dp"
+        android:fontFamily="sans-serif-condensed"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/descriptionId"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="48dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.09"
         android:text="@string/taskDescription"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="#95a0ae"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="8dp" />
 
     <TextView
         android:id="@+id/descriptiondata"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="48dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.26"
         android:text="@string/taskDescriptionData"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textColor="#95a0ae"
+        android:fontFamily="sans-serif-condensed"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="8dp" />
 
     <TextView
         android:id="@+id/responseId"
@@ -42,61 +57,88 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.05"
         android:text="@string/taskResults"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textColor="#95a0ae"
+        android:fontFamily="sans-serif-condensed"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:paddingLeft="16dp"
+        android:paddingTop="4dp"
+        android:paddingRight="16dp"
+        />
 
     <EditText
         android:id="@+id/responsedata"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.20"
-        android:inputType="text" />
+        android:inputType="text"
+        android:fontFamily="sans-serif-condensed"
+        android:paddingLeft="16dp"
+        android:paddingTop="4dp"
+        android:paddingRight="16dp"
+        android:textColor="#fff"
+        android:background="@drawable/input_back"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp" />
 
-    <GridLayout
-        android:id="@+id/ButtonLayout"
-        android:layout_width="376dp"
-        android:layout_height="77dp"
-        android:layout_weight="0.03">
+    <ToggleButton
+        android:id="@+id/claimRelease"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:shape="rectangle"
+        android:layout_row="3"
+        android:checked="true"
+        android:text="@string/taskClaimButtonId"
+        android:textOff="@string/toggle_turn_off"
+        android:textOn="@string/toggle_turn_on"
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/toggle_btn"/>
 
-        <ToggleButton
-            android:id="@+id/claimRelease"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:shape="rectangle"
-            android:layout_row="3"
-            android:checked="false"
-            android:text="@string/taskClaimButtonId"
-            android:textOff="@string/toggle_turn_off"
-            android:textOn="@string/toggle_turn_on" />
+    <Button
+        android:id="@+id/taskStart"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_row="3"
+        android:checked="false"
+        android:text="@string/taskStartButtonId"
+        android:textOff="@string/start_task"
+        android:textOn="@string/complete_task"
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_live_dark"/>
 
-        <Button
-            android:id="@+id/taskStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_row="3"
-            android:checked="false"
-            android:text="@string/taskStartButtonId"
-            android:textOff="@string/start_task"
-            android:textOn="@string/complete_task" />
+    <Button
+        android:id="@+id/taskfail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_column="2"
+        android:layout_row="3"
+        android:text="@string/taskFailButtonId"
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_live_dark"/>
 
-        <Button
-            android:id="@+id/taskfail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="2"
-            android:layout_row="3"
-            android:text="@string/taskFailButtonId" />
-
-        <Button
-            android:id="@+id/taskComplete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="3"
-            android:layout_row="3"
-            android:text="@string/completeButtonId" />
-    </GridLayout>
+    <Button
+        android:id="@+id/taskComplete"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_column="3"
+        android:layout_row="3"
+        android:text="@string/completeButtonId"
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_live_dark"/>
 
 
 </LinearLayout>

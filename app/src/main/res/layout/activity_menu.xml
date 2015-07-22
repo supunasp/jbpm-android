@@ -2,76 +2,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:useDefaultMargins="true"
     android:alignmentMode="alignBounds"
-    tools:context="org.jbpm.mobileclient.MenuActivity">
+    tools:context="org.jbpm.mobileclient.MenuActivity"
+    android:background="#1c2125">
 
-    <Button
-        android:id="@+id/tasksbutton"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tasks"
-        android:layout_above="@+id/processbutton"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:bottom="3dp"
-        android:top="3dp"
-        android:shape="rectangle"
-        android:radius="2dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        />
+        android:layout_height="50dp"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:paddingLeft="20dp"
+        android:gravity="center_vertical"
+        android:background="#0c0f12"
+        android:id="@+id/linearLayout">
 
-    <Button
-        android:id="@+id/processbutton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center"
-        android:text="Process Definitions"
-        android:bottom="3dp"
-        android:top="3dp"
-        android:shape="rectangle"
-        android:radius="2dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="5"
+            android:layout_row="1"
+            android:text="  User Name"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#fff"
+            android:gravity="center_vertical"
+            android:fontFamily="sans-serif-condensed" />
 
-    />
-
-    <Button
-        android:id="@+id/dashboardbutton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="DashBoard"
-        android:layout_below="@+id/processInstances"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:bottom="3dp"
-        android:top="3dp"
-        android:shape="rectangle"
-        android:radius="2dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Process Instances"
-        android:id="@+id/processInstances"
-        android:layout_below="@+id/processbutton"
-        android:layout_centerHorizontal="true"
-        android:bottom="3dp"
-        android:top="3dp"
-        android:shape="rectangle"
-        android:radius="2dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+    </LinearLayout>
 
     <Button
         android:id="@+id/logoutbutton"
@@ -80,37 +39,117 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:text="Log Out" />
+        android:text="Log Out"
+        android:background="@drawable/btn_live_dark"
+        android:textColor="#1c2125"
+        android:fontFamily="sans-serif-condensed" />
 
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+    <LinearLayout
         android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/linearLayout"
         android:gravity="center"
-        android:padding="15dp"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/tasksbutton">
+        android:id="@+id/linearLayout2">
 
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="203dp"
-            android:layout_height="67dp"
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="80dp"
+            android:id="@+id/imageView"
+            android:background="@drawable/jbpm_logo_600px"
+            android:layout_row="0"
             android:layout_column="5"
-            android:layout_row="1"
-            android:layout_rowSpan="2"
-            android:text="User Name"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:layout_below="@+id/linearLayout"
+            android:layout_centerHorizontal="true" />
+    </LinearLayout>
 
-        <TextView
-            android:id="@+id/usernameIdmenu"
-            android:layout_width="174dp"
-            android:layout_height="67dp"
-            android:layout_column="4"
-            android:layout_row="2"
-            android:text="User Name :"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-    </GridLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_above="@+id/logoutbutton"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <Button
+            android:id="@+id/tasksbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tasks"
+            android:layout_above="@+id/processbutton"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:bottom="3dp"
+            android:top="3dp"
+            android:shape="rectangle"
+            android:radius="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_live_dark"
+            android:textColor="#1c2125"
+            android:fontFamily="sans-serif-condensed" />
+
+        <Button
+            android:id="@+id/processbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:text="Process Definitions"
+            android:bottom="3dp"
+            android:top="3dp"
+            android:shape="rectangle"
+            android:radius="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_live_dark"
+
+            android:layout_marginTop="10dp"
+            android:textColor="#1c2125"
+            android:fontFamily="sans-serif-condensed" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Process Instances"
+            android:id="@+id/processInstances"
+            android:layout_below="@+id/processbutton"
+            android:layout_centerHorizontal="true"
+            android:bottom="3dp"
+            android:top="3dp"
+            android:shape="rectangle"
+            android:radius="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_live_dark"
+            android:layout_marginTop="10dp"
+            android:textColor="#1c2125"
+            android:fontFamily="sans-serif-condensed" />
+
+        <Button
+            android:id="@+id/dashboardbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DashBoard"
+            android:layout_below="@+id/processInstances"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:bottom="3dp"
+            android:top="3dp"
+            android:shape="rectangle"
+            android:radius="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_live_dark"
+            android:layout_marginTop="10dp"
+            android:textColor="#1c2125"
+            android:fontFamily="sans-serif-condensed" />
+
+    </LinearLayout>
 
 </RelativeLayout>

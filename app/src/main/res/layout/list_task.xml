@@ -14,7 +14,8 @@
         android:layout_alignParentTop="true"
         android:ellipsize="marquee"
         android:singleLine="true"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#fff"/>
 
     <!-- Actual TaskObject Name Data -->
     <TextView
@@ -26,7 +27,8 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@id/nametext"
         android:ellipsize="marquee"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:textColor="#95a0ae"/>
 
     <!-- Description Tag -->
     <TextView
@@ -36,7 +38,8 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/nametext"
         android:singleLine="false"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#95a0ae"/>
     <!-- This is the actual description -->
     <TextView
         android:id="@+id/detailsdata"
@@ -45,5 +48,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_below="@id/detailstext"
-        android:singleLine="false" />
+        android:singleLine="false"
+        android:textColor="#95a0ae"/>
 </RelativeLayout>
