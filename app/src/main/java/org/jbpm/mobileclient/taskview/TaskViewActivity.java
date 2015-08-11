@@ -41,7 +41,7 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
     EditText responseData;
 
     TaskObject taskObject;
-    String taskname = " ";
+    String taskname = " ",serverAddress="";
     Intent intent;
 
     @Override
@@ -53,6 +53,8 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
         usrname = intent.getExtras().getString("username");
         authHeader = intent.getExtras().getString("AuthHeader");
         taskObject = (TaskObject) intent.getSerializableExtra("taskObject");
+
+        serverAddress+=intent.getExtras().getString("ServerAddress");
 
         // Claim and Release Button
         btnClaim = (ToggleButton) findViewById(R.id.claimRelease);
@@ -108,6 +110,7 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
         intent = new Intent(this, TaskActivity.class);
         intent.putExtra("username", usrname);
         intent.putExtra("AuthHeader", authHeader);
+        intent.putExtra("ServerAddress",serverAddress);
     }
 
     @Override
@@ -123,7 +126,7 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
                     try {
                         output =
                                 new getTaskDone()
-                                        .execute("http://10.0.2.2:8080/jbpm-console/rest/task/" + taskObject.getTaskId() + "/claim")
+                                        .execute(serverAddress+"/rest/task/" + taskObject.getTaskId() + "/claim")
                                         .get();
                     } catch (InterruptedException | ExecutionException e) {
                         e.printStackTrace();
@@ -139,7 +142,7 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
                     try {
                         output =
                                 new getTaskDone()
-                                        .execute("http://10.0.2.2:8080/jbpm-console/rest/task/" + taskObject.getTaskId() + "/release")
+                                        .execute(serverAddress+"/rest/task/" + taskObject.getTaskId() + "/release")
                                         .get();
 
 
@@ -163,7 +166,7 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
                 try {
                     output =
                             new getTaskDone()
-                                    .execute("http://10.0.2.2:8080/jbpm-console/rest/task/" + taskObject.getTaskId() + "/start")
+                                    .execute(serverAddress+"/rest/task/" + taskObject.getTaskId() + "/start")
                                     .get();
 
                 } catch (InterruptedException | ExecutionException e) {
@@ -185,7 +188,7 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
                 try {
                     output =
                             new getTaskDone()
-                                    .execute("http://10.0.2.2:8080/jbpm-console/rest/task/" + taskObject.getTaskId() + "/fail")
+                                    .execute(serverAddress+"/rest/task/" + taskObject.getTaskId() + "/fail")
                                     .get();
 
                 } catch (InterruptedException | ExecutionException e) {
@@ -204,7 +207,7 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
                 try {
                     output =
                             new getTaskDone()
-                                    .execute("http://10.0.2.2:8080/jbpm-console/rest/task/" + taskObject.getTaskId() + "/complete?map_performance=" + responseData.getText().toString())
+                                    .execute(serverAddress+"/rest/task/" + taskObject.getTaskId() + "/complete?map_performance=" + responseData.getText().toString())
                                     .get();
                 } catch (InterruptedException | ExecutionException e) {
                     e.printStackTrace();
@@ -271,7 +274,8 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } else descriptionData.setText("Network Connection is not available");
+            } else
+                Toast.makeText(getApplicationContext(),"Network Connection is not Available",Toast.LENGTH_SHORT).show();
             return line;
         }
 

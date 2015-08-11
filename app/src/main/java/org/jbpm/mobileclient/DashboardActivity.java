@@ -42,6 +42,7 @@ public class DashboardActivity extends Activity implements View.OnClickListener 
     TextView t;
     String usrname;
     String authHeader;
+    String serverAddress="";
     Intent mIntent;
 
     TextView totalInstances;
@@ -63,11 +64,6 @@ public class DashboardActivity extends Activity implements View.OnClickListener 
     String totalTasksNo = "";
     String completedTasksNo = "";
 
-
-
-    /**
-     * Called when the activity is first created.
-     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -77,6 +73,7 @@ public class DashboardActivity extends Activity implements View.OnClickListener 
         Intent intent = getIntent();
         usrname = intent.getExtras().getString("username");
         authHeader = intent.getExtras().getString("AuthHeader");
+        serverAddress+=intent.getExtras().getString("ServerAddress");
 
         t = (TextView) findViewById(R.id.dashUsername);
         t.setText(usrname);
@@ -113,18 +110,17 @@ public class DashboardActivity extends Activity implements View.OnClickListener 
         mIntent = new Intent(this, MenuActivity.class);
         mIntent.putExtra("username", usrname);
         mIntent.putExtra("AuthHeader", authHeader);
+        mIntent.putExtra("ServerAddress",serverAddress);
         finish();
         startActivity(mIntent);
     }
 
     private class GetTaskList extends AsyncTask<Void, Void, Boolean> {
-        private final String userName;
         private final String authHeader;
 
         HttpURLConnection conn;
 
         GetTaskList(String userNme, String authHeader) {
-            userName = userNme;
             this.authHeader = authHeader;
         }
 
@@ -135,7 +131,7 @@ public class DashboardActivity extends Activity implements View.OnClickListener 
                 String response;
                 URL url;
                 try {
-                    url = new URL("http://10.0.2.2:8080/jbpm-console/rest/history/instances");
+                    url = new URL(serverAddress+"/rest/history/instances");
                     conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");
                     conn.setRequestProperty("Authorization", authHeader);
@@ -154,7 +150,7 @@ public class DashboardActivity extends Activity implements View.OnClickListener 
                 }
 
                 try {
-                    url = new URL("http://10.0.2.2:8080/jbpm-console/rest/task/query");
+                    url = new URL(serverAddress+"/rest/task/query");
 
                     conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");

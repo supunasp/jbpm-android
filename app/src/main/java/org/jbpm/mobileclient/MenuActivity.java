@@ -19,6 +19,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
 
     String usrname = "";
     String authHeader = "";
+    String serverAddress="";
     Button btn_Tasks;
     Button btn_process;
     Button btn_process_Instances;
@@ -36,6 +37,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         Intent intent = getIntent();
         usrname += intent.getExtras().getString("username");
         authHeader += intent.getExtras().getString("AuthHeader");
+        serverAddress+=intent.getExtras().getString("ServerAddress");
         // Dashboard Tasks button
         btn_Tasks = (Button) findViewById(R.id.tasksbutton);
         btn_Tasks.setShadowLayer(1, 0, 0, Color.BLACK);
@@ -82,6 +84,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
                 intent = new Intent(MenuActivity.this, TaskActivity.class);
                 intent.putExtra("username", usrname);
                 intent.putExtra("AuthHeader", authHeader);
+                intent.putExtra("ServerAddress",serverAddress);
                 startActivity(intent);
 
                 break;
@@ -91,6 +94,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
                 intent = new Intent(MenuActivity.this, ProcessDefActivity.class);
                 intent.putExtra("username", usrname);
                 intent.putExtra("AuthHeader", authHeader);
+                intent.putExtra("ServerAddress",serverAddress);
                 startActivity(intent);
 
                 break;
@@ -101,6 +105,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
                 intent = new Intent(MenuActivity.this, ProcessInsActivity.class);
                 intent.putExtra("username", usrname);
                 intent.putExtra("AuthHeader", authHeader);
+                intent.putExtra("ServerAddress",serverAddress);
                 startActivity(intent);
 
                 break;
@@ -110,6 +115,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
                 intent = new Intent(MenuActivity.this, DashboardActivity.class);
                 intent.putExtra("username", usrname);
                 intent.putExtra("AuthHeader", authHeader);
+                intent.putExtra("ServerAddress",serverAddress);
                 startActivity(intent);
 
 
@@ -124,7 +130,6 @@ public class MenuActivity extends Activity implements View.OnClickListener {
 
                 break;
         }
-
     }
 }
 

@@ -28,7 +28,7 @@ public class ProcessDefViewActivity extends Activity implements View.OnClickList
 
     TextView ids;
     private Intent intent;
-    private String authHeader;
+    private String authHeader,serverAddress="";
     private ProcessObject processObject;
 
     @Override
@@ -40,6 +40,7 @@ public class ProcessDefViewActivity extends Activity implements View.OnClickList
         String usrname = intent.getExtras().getString("username");
         authHeader = intent.getExtras().getString("AuthHeader");
         processObject = (ProcessObject) intent.getSerializableExtra("processObject");
+        serverAddress+=intent.getExtras().getString("ServerAddress");
 
         TextView userName = (TextView) findViewById(R.id.username);
         userName.setText(usrname);
@@ -70,6 +71,7 @@ public class ProcessDefViewActivity extends Activity implements View.OnClickList
         intent = new Intent(this, ProcessDefActivity.class);
         intent.putExtra("username", usrname);
         intent.putExtra("AuthHeader", authHeader);
+        intent.putExtra("ServerAddress",serverAddress);
 
     }
     @Override
@@ -82,7 +84,7 @@ public class ProcessDefViewActivity extends Activity implements View.OnClickList
                 try {
                     switch (output =
                             new getProcessDone()
-                                    .execute("http://10.0.2.2:8080/jbpm-console/rest/runtime/" + processObject.getDeploymentId() + "/process/" + processObject.getProcessId() + "/start")
+                                    .execute(serverAddress+"/rest/runtime/" + processObject.getDeploymentId() + "/process/" + processObject.getProcessId() + "/start")
                                     .get()) {
                     }
                 } catch (InterruptedException | ExecutionException e) {
@@ -145,7 +147,9 @@ public class ProcessDefViewActivity extends Activity implements View.OnClickList
                     e.printStackTrace();
 
                 }
-            } else ids.setText("Network Connection is not available");
+            } else
+
+                Toast.makeText(getApplicationContext(),"Network Connection is not Available",Toast.LENGTH_SHORT).show();
             return line;
         }
 

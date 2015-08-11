@@ -27,6 +27,7 @@ public class LoginActivity extends Activity {
     // UI references.
     private EditText mUserView;
     private EditText mPasswordView;
+    private final String serverAddress ="http://10.0.2.2:8080/jbpm-console";
 
 
     @Override
@@ -134,6 +135,7 @@ public class LoginActivity extends Activity {
                 Intent i = new Intent(LoginActivity.this, MenuActivity.class);
                 i.putExtra("username", userName);
                 i.putExtra("AuthHeader", authHeader);
+                i.putExtra("ServerAddress",serverAddress);
                 startActivity(i);
                 finish();
             }

@@ -38,16 +38,13 @@ public class ProcessDefActivity extends ListActivity implements View.OnClickList
 
     ProcessDefAdapter process_adapter;
     TextView t;
-    String usrname;
+    String usrname,serverAddress="";
     String authHeader;
     Button menuButton;
     Intent mIntent;
     // declare class variables
     private ArrayList<ProcessObject> process_list = new ArrayList<>();
 
-    /**
-     * Called when the activity is first created.
-     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -58,6 +55,7 @@ public class ProcessDefActivity extends ListActivity implements View.OnClickList
         Intent intent = getIntent();
         usrname = intent.getExtras().getString("username");
         authHeader = intent.getExtras().getString("AuthHeader");
+        serverAddress+=intent.getExtras().getString("ServerAddress");
 
         t = (TextView) findViewById(R.id.username);
         t.setText(usrname);
@@ -84,6 +82,7 @@ public class ProcessDefActivity extends ListActivity implements View.OnClickList
         mBundle.putSerializable("processObject", processObject);
         mIntent.putExtra("username", usrname);
         mIntent.putExtra("AuthHeader", authHeader);
+        mIntent.putExtra("ServerAddress",serverAddress);
         mIntent.putExtras(mBundle);
         startActivity(mIntent);
     }
@@ -93,6 +92,7 @@ public class ProcessDefActivity extends ListActivity implements View.OnClickList
         mIntent = new Intent(this, MenuActivity.class);
         mIntent.putExtra("username", usrname);
         mIntent.putExtra("AuthHeader", authHeader);
+        mIntent.putExtra("ServerAddress",serverAddress);
         finish();
         startActivity(mIntent);
     }
@@ -116,7 +116,7 @@ public class ProcessDefActivity extends ListActivity implements View.OnClickList
                 String response;
                 URL url;
                 try {
-                    url = new URL("http://10.0.2.2:8080/jbpm-console/rest/deployment/processes?p=0&s=100");
+                    url = new URL(serverAddress+"/rest/deployment/processes?p=0&s=100");
                     conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");
                     conn.setRequestProperty("Authorization", authHeader);
@@ -146,7 +146,7 @@ public class ProcessDefActivity extends ListActivity implements View.OnClickList
                     @Override
                     public void run() {
                         Toast.makeText(getApplicationContext(),
-                                "Couldn't get the process Definitions list! Check ur Connection ", Toast.LENGTH_LONG)
+                                "Couldn't get the process Definitions list! Check your Connection ", Toast.LENGTH_LONG)
                                 .show();
                     }
                 });

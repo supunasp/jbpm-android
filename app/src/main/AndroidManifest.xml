@@ -48,11 +48,6 @@
             android:name=".processView.ProcessInsActivity"
             android:label="@string/title_activity_process_instances"
             android:screenOrientation="portrait"/>
-        <activity
-            android:name=".taskView.TaskCompleteActivity"
-            android:label="@string/title_activity_task_complete"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar"/>
     </application>
 
 </manifest>

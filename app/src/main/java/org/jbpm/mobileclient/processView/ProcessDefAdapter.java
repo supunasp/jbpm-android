@@ -12,7 +12,8 @@ import org.jbpm.mobileclient.R;
 import java.util.ArrayList;
 
 /**
- * Created by Supun Athukorala on 6/10/2015.
+ * Created by Supun Prabhath on 6/10/2015.
+ * Project MobileClient
  */
 public class ProcessDefAdapter extends ArrayAdapter<ProcessObject> {
 

@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 /**
- * Created by Supun Athukorala on 6/10/2015.
+ * Created by Supun Prabhath on 6/25/2015.
+ * Project MobileClient
  */
 public class ProcessObject implements Serializable{
 

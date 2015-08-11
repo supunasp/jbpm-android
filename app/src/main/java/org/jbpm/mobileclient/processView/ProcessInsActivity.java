@@ -40,7 +40,7 @@ import javax.xml.xpath.XPathFactory;
 
 public class ProcessInsActivity extends ListActivity implements View.OnClickListener {
 
-    String usrname,authHeader;
+    String usrname,authHeader,serverAddress="";
     Intent intent;
     ArrayList<ProcessObject> process_list=new ArrayList<>();
     ProcessInsAdaptor process_adapter;
@@ -52,6 +52,7 @@ public class ProcessInsActivity extends ListActivity implements View.OnClickList
          intent = getIntent();
         usrname = intent.getExtras().getString("username");
         authHeader = intent.getExtras().getString("AuthHeader");
+        serverAddress+=intent.getExtras().getString("ServerAddress");
 
         TextView username = (TextView) findViewById(R.id.usernameIns);
         username.setText(usrname);
@@ -69,6 +70,7 @@ public class ProcessInsActivity extends ListActivity implements View.OnClickList
         intent = new Intent(this, MenuActivity.class);
         intent.putExtra("username", usrname);
         intent.putExtra("AuthHeader", authHeader);
+        intent.putExtra("ServerAddress",serverAddress);
     }
 
     @Override
@@ -97,7 +99,7 @@ public class ProcessInsActivity extends ListActivity implements View.OnClickList
                 String response;
                 URL url;
                 try {
-                    url = new URL("http://10.0.2.2:8080/jbpm-console/rest/history/instances");
+                    url = new URL(serverAddress+"/rest/history/instances");
                     conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");
                     conn.setRequestProperty("Authorization", authHeader);
@@ -207,9 +209,4 @@ public class ProcessInsActivity extends ListActivity implements View.OnClickList
             return process_list;
         }
     }
-
-
-
-
-
 }

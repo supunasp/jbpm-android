@@ -38,7 +38,8 @@ public class TaskActivity extends ListActivity implements View.OnClickListener {
 
     TaskAdapter task_adapter;
     TextView t;
-    String usrname;
+    String usrname="";
+    String serverAddress="";
     String authHeader;
     Button menuButton;
     Intent mIntent;
@@ -58,6 +59,7 @@ public class TaskActivity extends ListActivity implements View.OnClickListener {
         Intent intent = getIntent();
         usrname = intent.getExtras().getString("username");
         authHeader = intent.getExtras().getString("AuthHeader");
+        serverAddress+=intent.getExtras().getString("ServerAddress");
 
         t = (TextView) findViewById(R.id.username);
         t.setText(usrname);
@@ -84,6 +86,7 @@ public class TaskActivity extends ListActivity implements View.OnClickListener {
         mBundle.putSerializable("taskObject", taskObject);
         mIntent.putExtra("username", usrname);
         mIntent.putExtra("AuthHeader", authHeader);
+        mIntent.putExtra("ServerAddress",serverAddress);
         mIntent.putExtras(mBundle);
         startActivity(mIntent);
     }
@@ -93,6 +96,7 @@ public class TaskActivity extends ListActivity implements View.OnClickListener {
         mIntent = new Intent(this, MenuActivity.class);
         mIntent.putExtra("username", usrname);
         mIntent.putExtra("AuthHeader", authHeader);
+        mIntent.putExtra("ServerAddress",serverAddress);
         finish();
         startActivity(mIntent);
     }
@@ -116,7 +120,7 @@ public class TaskActivity extends ListActivity implements View.OnClickListener {
                 String response;
                 URL url;
                 try {
-                    url = new URL("http://10.0.2.2:8080/jbpm-console/rest/task/query?potentialOwner=" + userName);
+                    url = new URL(serverAddress+"/rest/task/query?potentialOwner=" + userName);
                     conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");
                     conn.setRequestProperty("Authorization", authHeader);
