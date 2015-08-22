@@ -36,6 +36,9 @@ public class ProcessDefViewActivity extends Activity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_process_view);
 
+        /**
+         * get user details, authentication header and server address from server
+         **/
         intent = getIntent();
         String usrname = intent.getExtras().getString("username");
         authHeader = intent.getExtras().getString("AuthHeader");

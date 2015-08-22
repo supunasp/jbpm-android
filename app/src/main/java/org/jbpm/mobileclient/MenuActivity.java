@@ -32,12 +32,16 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         setContentView(activity_menu);
 
         /**
-         * Creating all buttons instances
+         *   get data from previous activity via intent.
          * */
         Intent intent = getIntent();
         usrname += intent.getExtras().getString("username");
         authHeader += intent.getExtras().getString("AuthHeader");
         serverAddress+=intent.getExtras().getString("ServerAddress");
+
+        /**
+         *  all buttons instances
+         * */
         // Dashboard Tasks button
         btn_Tasks = (Button) findViewById(R.id.tasksbutton);
         btn_Tasks.setShadowLayer(1, 0, 0, Color.BLACK);
@@ -79,8 +83,8 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         Intent intent;
         switch (v.getId()) {
             case R.id.tasksbutton:
-                // Tasks button
 
+                // Tasks button
                 intent = new Intent(MenuActivity.this, TaskActivity.class);
                 intent.putExtra("username", usrname);
                 intent.putExtra("AuthHeader", authHeader);

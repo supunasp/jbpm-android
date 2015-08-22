@@ -40,54 +40,70 @@ import javax.xml.xpath.XPathFactory;
 
 public class ProcessInsActivity extends ListActivity implements View.OnClickListener {
 
-    String usrname,authHeader,serverAddress="";
+    String usrname, authHeader, serverAddress = "";
     Intent intent;
-    ArrayList<ProcessObject> process_list=new ArrayList<>();
+    ArrayList<ProcessObject> process_list = new ArrayList<>();
     ProcessInsAdaptor process_adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_process_instances);
 
-         intent = getIntent();
+        /**
+         * get the user details, authentication header and server address
+         **/
+        intent = getIntent();
         usrname = intent.getExtras().getString("username");
         authHeader = intent.getExtras().getString("AuthHeader");
-        serverAddress+=intent.getExtras().getString("ServerAddress");
+        serverAddress += intent.getExtras().getString("ServerAddress");
 
+        /**
+         *  set ui elements
+         **/
         TextView username = (TextView) findViewById(R.id.usernameIns);
         username.setText(usrname);
-        GetTaskList getTask = new GetTaskList(usrname, authHeader);
-        getTask.execute((Void) null);
 
+        /**
+         * get instances list and show them
+         **/
+        GetInstancesList getInstances = new GetInstancesList(usrname, authHeader);
+        getInstances.execute((Void) null);
 
-       process_adapter = new ProcessInsAdaptor(this, R.layout.list_task, process_list);
+        /**
+         *  show instances list in adaptor
+         **/
+        process_adapter = new ProcessInsAdaptor(this, R.layout.custom_list_view, process_list);
         setListAdapter(process_adapter);
 
         Button close = (Button) findViewById(R.id.closeButton);
         close.setOnClickListener(this);
 
-
+        /**
+         * send data to menu intent
+         **/
         intent = new Intent(this, MenuActivity.class);
         intent.putExtra("username", usrname);
         intent.putExtra("AuthHeader", authHeader);
-        intent.putExtra("ServerAddress",serverAddress);
+        intent.putExtra("ServerAddress", serverAddress);
     }
 
     @Override
     public void onClick(View v) {
-
-
+        /**
+         *  close button
+         **/
         startActivity(intent);
         finish();
     }
 
-    private class GetTaskList extends AsyncTask<Void, Void, Boolean> {
+    private class GetInstancesList extends AsyncTask<Void, Void, Boolean> {
         private final String userName;
         private final String authHeader;
 
         HttpURLConnection conn;
 
-        GetTaskList(String userNme, String authHeader) {
+        GetInstancesList(String userNme, String authHeader) {
             userName = userNme;
             this.authHeader = authHeader;
         }
@@ -99,7 +115,10 @@ public class ProcessInsActivity extends ListActivity implements View.OnClickList
                 String response;
                 URL url;
                 try {
-                    url = new URL(serverAddress+"/rest/history/instances");
+                    /**
+                     *  get instances list from server
+                     **/
+                    url = new URL(serverAddress + "/rest/history/instances");
                     conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");
                     conn.setRequestProperty("Authorization", authHeader);
@@ -120,7 +139,8 @@ public class ProcessInsActivity extends ListActivity implements View.OnClickList
                     Toast.makeText(getApplicationContext(),
                             "Network Connection is not available ", Toast.LENGTH_LONG)
                             .show();
-                }});
+                }
+            });
 
             if (process_list.isEmpty()) {
 
@@ -145,13 +165,18 @@ public class ProcessInsActivity extends ListActivity implements View.OnClickList
             return true;
         }
 
+        /**
+         * check whether network is available
+         **/
         public boolean isNetworkAvailable() {
             ConnectivityManager cm = (ConnectivityManager)
                     getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = cm.getActiveNetworkInfo();
             return networkInfo != null && networkInfo.isConnected();
         }
-
+        /**
+         *  get process list by response from server
+         **/
         private ArrayList<ProcessObject> getProcessList(String response) {
 
 
@@ -160,10 +185,10 @@ public class ProcessInsActivity extends ListActivity implements View.OnClickList
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder;
 
-            String processInsId="";
-            String processName="";
-            String processExId="";
-            String processVersion="";
+            String processInsId = "";
+            String processName = "";
+            String processExId = "";
+            String processVersion = "";
             try {
                 builder = factory.newDocumentBuilder();
                 Document doc = builder.parse(new InputSource(new StringReader(
@@ -174,32 +199,31 @@ public class ProcessInsActivity extends ListActivity implements View.OnClickList
                 NodeList nl = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
 
 
-
                 for (int i = 0; i < nl.getLength(); i++) {
-                    NodeList processInsNode= nl.item(i).getChildNodes();
+                    NodeList processInsNode = nl.item(i).getChildNodes();
 
-                    for(int j=0;j<processInsNode.getLength();j++){
+                    for (int j = 0; j < processInsNode.getLength(); j++) {
 
                         Node childNode = processInsNode.item(j);
                         if ("process-instance-id".equals(childNode.getNodeName())) {
-                            processInsId=processInsNode.item(j).getTextContent()
+                            processInsId = processInsNode.item(j).getTextContent()
                                     .trim();
                         }
                         if ("process-name".equals(childNode.getNodeName())) {
-                            processName=processInsNode.item(j).getTextContent()
+                            processName = processInsNode.item(j).getTextContent()
                                     .trim();
                         }
                         if ("external-id".equals(childNode.getNodeName())) {
-                            processExId=processInsNode.item(j).getTextContent()
+                            processExId = processInsNode.item(j).getTextContent()
                                     .trim();
                         }
                         if ("process-version".equals(childNode.getNodeName())) {
-                            processVersion=processInsNode.item(j).getTextContent()
+                            processVersion = processInsNode.item(j).getTextContent()
                                     .trim();
                         }
 
                     }
-                    ProcessObject processObject = new ProcessObject(processInsId, processName, processExId ,processVersion);
+                    ProcessObject processObject = new ProcessObject(processInsId, processName, processExId, processVersion);
                     processObject.setProcessSummery(processInsNode.toString());
                     process_list.add(processObject);
                 }

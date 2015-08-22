@@ -36,6 +36,9 @@ public class ProcessDefAdapter extends ArrayAdapter<ProcessObject> {
 
         if (i != null) {
 
+            /**
+             * show prcess details one by one in list View
+             **/
             TextView nameId = (TextView) convertView.findViewById(R.id.nametext);
             TextView nameData = (TextView) convertView.findViewById(R.id.namedata);
 

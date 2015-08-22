@@ -115,14 +115,16 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        // define the button that invoked the listener by id
+
 
         String output = " Not Done";
         String responseMsg;
         switch (view.getId()) {
             case R.id.claimRelease:
                 if (btnClaim.isChecked()) {
-                    //Release button
+                    /**
+                     * claim the task
+                     **/
                     try {
                         output =
                                 new getTaskDone()
@@ -140,6 +142,9 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
                     }
                 } else {
                     try {
+                        /**
+                         * release the task
+                         **/
                         output =
                                 new getTaskDone()
                                         .execute(serverAddress+"/rest/task/" + taskObject.getTaskId() + "/release")
@@ -161,7 +166,9 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
 
                 break;
             case R.id.taskStart:
-                // Start button
+                /**
+                 * start the task
+                 **/
 
                 try {
                     output =
@@ -183,7 +190,9 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
 
                 break;
             case R.id.taskfail:
-                //Fail button
+                /**
+                 * fail the task
+                 **/
 
                 try {
                     output =
@@ -202,7 +211,9 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
 
                 break;
             case R.id.taskComplete:
-                //Delegate button
+                /**
+                 * complete the task
+                 **/
 
                 try {
                     output =
@@ -223,6 +234,9 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    /**
+     * set the task response
+     **/
     private String setResponse(String output) {
         String responseMsg = "";
         if (output.length() > 10) {
@@ -234,6 +248,9 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
         return responseMsg;
     }
 
+    /**
+     * check whether network is available
+     **/
     public boolean isNetworkAvailable() {
         ConnectivityManager cm = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -241,6 +258,9 @@ public class TaskViewActivity extends Activity implements View.OnClickListener {
         return networkInfo != null && networkInfo.isConnected();
     }
 
+    /**
+     * do operations on task
+     **/
     public class getTaskDone extends AsyncTask<String, Integer, String> {
         HttpURLConnection conn;
         URL url;

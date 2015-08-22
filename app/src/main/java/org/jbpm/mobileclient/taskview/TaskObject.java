@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 /**
  * Created by Supun Athukorala on 6/10/2015.
+ * MobileClient
+ *
  */
 public class TaskObject implements Serializable {
 
@@ -13,7 +15,9 @@ public class TaskObject implements Serializable {
     private String status;
     private String taskSummery;
 
-
+    /**
+     * Task object
+     **/
     public TaskObject() {
 
     }

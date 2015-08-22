@@ -17,14 +17,22 @@ import java.util.ArrayList;
  */
 public class ProcessInsAdaptor extends ArrayAdapter<ProcessObject> {
 
-
+        /**
+         * array list for process details
+         **/
 private ArrayList<ProcessObject> processList;
 
+    /**
+     * set the view
+     **/
 public ProcessInsAdaptor(Context context, int textViewResourceId, ArrayList<ProcessObject> processList) {
         super(context, textViewResourceId, processList);
         this.processList = processList;
         }
 
+        /**
+         * set the details
+         **/
 public View getView(final int position, View convertView, ViewGroup parent) {
 
 

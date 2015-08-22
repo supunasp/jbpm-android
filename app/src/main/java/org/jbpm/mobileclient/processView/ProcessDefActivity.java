@@ -51,21 +51,35 @@ public class ProcessDefActivity extends ListActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_process);
 
-
+        /**
+         * get user details, authentication header , server address from previous intent
+         **/
         Intent intent = getIntent();
         usrname = intent.getExtras().getString("username");
         authHeader = intent.getExtras().getString("AuthHeader");
         serverAddress+=intent.getExtras().getString("ServerAddress");
 
+        /**
+         * set user details
+         **/
         t = (TextView) findViewById(R.id.username);
         t.setText(usrname);
 
-        GetProcessList getTask = new GetProcessList(usrname, authHeader);
-        getTask.execute((Void) null);
+        /**
+         * get process list from server
+         **/
+        GetProcessList getProcessList = new GetProcessList(usrname, authHeader);
+        getProcessList.execute((Void) null);
 
+        /**
+         * set adaptor for details
+         **/
         process_adapter = new ProcessDefAdapter(this, R.layout.list_process, process_list);
         setListAdapter(process_adapter);
 
+        /**
+         * set UI elements
+         **/
         menuButton = (Button) findViewById(R.id.menubutton);
         menuButton.setOnClickListener(this);
 
@@ -75,6 +89,9 @@ public class ProcessDefActivity extends ListActivity implements View.OnClickList
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
 
+        /**
+         * get touched process details and send data
+         **/
         ProcessObject processObject = process_list.get(position);
 
         mIntent = new Intent(this, ProcessDefViewActivity.class);
@@ -89,10 +106,14 @@ public class ProcessDefActivity extends ListActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        /**
+         * close button
+         **/
         mIntent = new Intent(this, MenuActivity.class);
         mIntent.putExtra("username", usrname);
         mIntent.putExtra("AuthHeader", authHeader);
         mIntent.putExtra("ServerAddress",serverAddress);
+
         finish();
         startActivity(mIntent);
     }
@@ -116,6 +137,9 @@ public class ProcessDefActivity extends ListActivity implements View.OnClickList
                 String response;
                 URL url;
                 try {
+                    /**
+                     * get process details from server by HttpURLConnection
+                     **/
                     url = new URL(serverAddress+"/rest/deployment/processes?p=0&s=100");
                     conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");
@@ -155,7 +179,7 @@ public class ProcessDefActivity extends ListActivity implements View.OnClickList
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    process_adapter = new ProcessDefAdapter(ProcessDefActivity.this, R.layout.list_task, process_list);
+                    process_adapter = new ProcessDefAdapter(ProcessDefActivity.this, R.layout.custom_list_view, process_list);
                     // display the list.
                     setListAdapter(process_adapter);
                 }
@@ -163,6 +187,9 @@ public class ProcessDefActivity extends ListActivity implements View.OnClickList
             return true;
         }
 
+        /**
+         * check whether network available
+         **/
         public boolean isNetworkAvailable() {
             ConnectivityManager cm = (ConnectivityManager)
                     getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -170,6 +197,9 @@ public class ProcessDefActivity extends ListActivity implements View.OnClickList
             return networkInfo != null && networkInfo.isConnected();
         }
 
+        /**
+         * get touched process details list from sever
+         **/
         private ArrayList<ProcessObject> getProcessList(String response) {
 
 

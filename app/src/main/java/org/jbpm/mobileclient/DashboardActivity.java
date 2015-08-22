@@ -40,7 +40,7 @@ public class DashboardActivity extends Activity implements View.OnClickListener 
 
 
     TextView t;
-    String usrname;
+    String usrName;
     String authHeader;
     String serverAddress="";
     Intent mIntent;
@@ -70,13 +70,19 @@ public class DashboardActivity extends Activity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(activity_dashboard);
 
+        /**
+         *   get data from previous activity via intent.
+         * */
         Intent intent = getIntent();
-        usrname = intent.getExtras().getString("username");
+        usrName = intent.getExtras().getString("username");
         authHeader = intent.getExtras().getString("AuthHeader");
         serverAddress+=intent.getExtras().getString("ServerAddress");
 
+        /**
+         *   set UI elements
+         * */
         t = (TextView) findViewById(R.id.dashUsername);
-        t.setText(usrname);
+        t.setText(usrName);
 
         totalInstances = (TextView) findViewById(R.id.totalInstances);
         activeInstances = (TextView) findViewById(R.id.instancesActive);
@@ -97,7 +103,7 @@ public class DashboardActivity extends Activity implements View.OnClickListener 
         totalTasks.setText(totalTasksNo);
         completedTasks.setText(completedTasksNo);
 
-        GetTaskList getTask = new GetTaskList(usrname, authHeader);
+        GetTaskList getTask = new GetTaskList(usrName, authHeader);
         getTask.execute((Void) null);
 
         Button close = (Button) findViewById(R.id.closeButton);
@@ -107,8 +113,11 @@ public class DashboardActivity extends Activity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
+        /**
+         *   send data to Menu activity via intent.
+         * */
         mIntent = new Intent(this, MenuActivity.class);
-        mIntent.putExtra("username", usrname);
+        mIntent.putExtra("username", usrName);
         mIntent.putExtra("AuthHeader", authHeader);
         mIntent.putExtra("ServerAddress",serverAddress);
         finish();
@@ -131,6 +140,9 @@ public class DashboardActivity extends Activity implements View.OnClickListener 
                 String response;
                 URL url;
                 try {
+                    /**
+                     *   get instances data from server.
+                     * */
                     url = new URL(serverAddress+"/rest/history/instances");
                     conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");
@@ -150,8 +162,10 @@ public class DashboardActivity extends Activity implements View.OnClickListener 
                 }
 
                 try {
+                    /**
+                     *   get task history data from server.
+                     * */
                     url = new URL(serverAddress+"/rest/task/query");
-
                     conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");
                     conn.setRequestProperty("Authorization", authHeader);
@@ -170,9 +184,10 @@ public class DashboardActivity extends Activity implements View.OnClickListener 
             } else runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getApplicationContext(),
-                            "Network Connection is not available ", Toast.LENGTH_LONG)
-                            .show();
+                    /**
+                     *   If connection is not available
+                     * */
+                    Toast.makeText(getApplicationContext(),"Network Connection is not available ", Toast.LENGTH_LONG).show();
 
                     totalInstances.setText(totalInstancesNo);
                     activeInstances.setText(activeInstancesNo);
@@ -188,6 +203,9 @@ public class DashboardActivity extends Activity implements View.OnClickListener 
             return true;
         }
 
+        /**
+         *   calculate Task summery.
+         * */
         private void calculateSummeryTasks(String response) {
 
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -220,6 +238,9 @@ public class DashboardActivity extends Activity implements View.OnClickListener 
             }
         }
 
+        /**
+         *   calculate Instances summery.
+         * */
         private void calculateSummeryInstances(String response) {
 
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -278,7 +299,9 @@ public class DashboardActivity extends Activity implements View.OnClickListener 
 
         }
 
-
+        /**
+         *   Check whether network is available .
+         * */
         public boolean isNetworkAvailable() {
             ConnectivityManager cm = (ConnectivityManager)
                     getSystemService(Context.CONNECTIVITY_SERVICE);

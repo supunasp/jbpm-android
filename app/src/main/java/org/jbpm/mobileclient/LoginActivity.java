@@ -27,6 +27,8 @@ public class LoginActivity extends Activity {
     // UI references.
     private EditText mUserView;
     private EditText mPasswordView;
+
+    // Server Address
     private final String serverAddress ="http://10.0.2.2:8080/jbpm-console";
 
 
@@ -37,9 +39,9 @@ public class LoginActivity extends Activity {
 
         // Set up the login form.
         mUserView = (EditText) findViewById(R.id.userName);
-
         mPasswordView = (EditText) findViewById(R.id.password);
 
+        //
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -122,6 +124,7 @@ public class LoginActivity extends Activity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
+            // set Authentication Header which will be used for later connections
             authHeader = "Basic " + ClientRestEngine.Base64Util.encode(userName + ":" + mPassword);
             return true;
         }

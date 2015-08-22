@@ -18,6 +18,9 @@ public class ProcessObject implements Serializable{
     private String processSummery;
 
 
+    /**
+     * process details object
+     **/
     public ProcessObject() {
 
     }

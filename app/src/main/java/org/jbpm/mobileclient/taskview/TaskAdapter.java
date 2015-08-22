@@ -19,7 +19,9 @@ public class TaskAdapter extends ArrayAdapter<TaskObject> {
 
 
     private ArrayList<TaskObject> tasksList;
-
+    /**
+     *   set task Adaptor
+     * */
     public TaskAdapter(Context context, int textViewResourceId, ArrayList<TaskObject> tasksList) {
         super(context, textViewResourceId, tasksList);
         this.tasksList = tasksList;
@@ -27,15 +29,19 @@ public class TaskAdapter extends ArrayAdapter<TaskObject> {
 
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-
         if (convertView == null) {
+
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_task, null);
+            convertView = inflater.inflate(R.layout.custom_list_view, null);
         }
         if(!tasksList.isEmpty()) {
             TaskObject i = tasksList.get(position);
 
             if (i != null) {
+
+                /**
+                 *   set task data
+                 * */
 
                 TextView nameId = (TextView) convertView.findViewById(R.id.nametext);
                 TextView nameData = (TextView) convertView.findViewById(R.id.namedata);
