@@ -9,7 +9,7 @@ The jBPM core engine itself is a lightweight workflow engine. Therefore it can b
 from the mobile UI, a prototype of jBPM on android will be also created where user can interact withoutconnect to the 
 jBPM-console.
 For more details and everything, visit the blog for pogress of the project.
-      http://aspedgsoc.blogspot.com/
+      https://supunasp.blogspot.com/
 
 This app uses the remote REST API to connect to the execution server of the jBPM Console and execute the Evaluation process there.
  
